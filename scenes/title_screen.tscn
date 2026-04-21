@@ -1,34 +1,33 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://ctrwy30ccwnbs"]
 
-[ext_resource type="Script" path="res://scenes/title_screen.gd" id="1"]
+[ext_resource type="Script" uid="uid://dndbd3jg75dqf" path="res://scripts/title-screen/title_screen.gd" id="1_sa3yf"]
+[ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_sa3yf"]
 
-[node name="TitleScreen" type="Control"]
+[node name="TitleScreen" type="Control" unique_id=849884656]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1")
+script = ExtResource("1_sa3yf")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=2121813454]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0666667, 0.0862745, 0.145098, 1)
+color = Color(0.17724368, 0.015274083, 0.10391378, 1)
 
-[node name="Accent" type="ColorRect" parent="."]
+[node name="Accent" type="ColorRect" parent="." unique_id=2040874688]
 layout_mode = 1
-offset_left = 0.0
-offset_top = 0.0
 offset_right = 640.0
 offset_bottom = 84.0
-color = Color(0.156863, 0.298039, 0.537255, 0.85)
+color = Color(0.5351725, 0.14051586, 0.17449829, 0.8509804)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=76292399]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,47 +35,56 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=656188378]
 custom_minimum_size = Vector2(280, 180)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=797080992]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=1687833316]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1209087691]
 layout_mode = 2
-text = "SMCCD Hackathon"
+theme_override_fonts/font = ExtResource("2_sa3yf")
+theme_override_font_sizes/font_size = 32
+text = "INSERT NAME HERE"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 28
 
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Press start to jump into the prototype"
-horizontal_alignment = 1
-autowrap_mode = 2
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2093256374]
 modulate = Color(0.854902, 0.886275, 0.945098, 0.9)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sa3yf")
+text = "Press Start"
+horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1841490615]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=347015909]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sa3yf")
 text = "Start Game"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1127756008]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sa3yf")
 text = "Quit"
 
-[node name="FooterLabel" type="Label" parent="."]
+[node name="Controls" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1670839226]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sa3yf")
+text = "Controls"
+
+[node name="FooterLabel" type="Label" parent="." unique_id=1930173759]
+modulate = Color(0.854902, 0.886275, 0.945098, 0.7)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -84,9 +92,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -30.0
 offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_sa3yf")
+text = "Credits: Braden Chiu. Michael Chen, Taiki Shinokawa"
 horizontal_alignment = 1
-text = "640 x 360 title screen"
-modulate = Color(0.854902, 0.886275, 0.945098, 0.7)
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_button_pressed"]
