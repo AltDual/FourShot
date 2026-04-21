@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cm2hbs0ugh64x" path="res://assets/images/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgfmrummuxwsx" path="res://scripts/Player/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://tbfwl67iermv" path="res://scenes/gun.tscn" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -426,5 +427,8 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1717828801]
 sprite_frames = SubResource("SpriteFrames_ha2mi")
-animation = &"attack_up"
-frame_progress = 0.65666443
+animation = &"run_right"
+frame_progress = 0.39947474
+
+[node name="Gun" parent="." unique_id=1679620526 instance=ExtResource("3_qhqgy")]
+position = Vector2(9, 0)

@@ -9,10 +9,16 @@ var last_direction: Vector2 = Vector2.RIGHT
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
-	process_animation()
+	var aim_dir = get_aim_direction()
+	$Gun.position.x = sign(aim_dir.x) * 10
+	process_animation(aim_dir)
 	move_and_slide()
 
 #Movement and Animation
+func get_aim_direction() -> Vector2:
+	var mouse_pos = get_global_mouse_position()
+	return (mouse_pos - global_position).normalized()
+
 func process_movement() -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -23,16 +29,16 @@ func process_movement() -> void:
 	else:
 		velocity = Vector2.ZERO
 
-func process_animation() -> void:
+func process_animation(aim_dir: Vector2) -> void:
 	if velocity != Vector2.ZERO:
-		play_animation("run", last_direction)
+		play_animation("run", aim_dir)
 	else:
-		play_animation("idle", last_direction)
+		play_animation("idle", aim_dir)
 func play_animation(prefix: String, dir: Vector2) -> void:
-	if dir.x != 0:
+	if abs(dir.x) > abs(dir.y):
 		animated_sprite_2d.flip_h = dir.x < 0
 		animated_sprite_2d.play(prefix + "_right")
 	elif dir.y < 0:
 		animated_sprite_2d.play(prefix + "_up")
-	elif dir.y > 0:
+	else:
 		animated_sprite_2d.play(prefix + "_down")
