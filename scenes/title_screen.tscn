@@ -69,15 +69,15 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sa3yf")
 text = "Start Game"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1127756008]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sa3yf")
-text = "Quit"
-
 [node name="ControlsButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1670839226]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sa3yf")
 text = "Controls"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1127756008]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sa3yf")
+text = "Quit"
 
 [node name="FooterLabel" type="Label" parent="." unique_id=1930173759]
 modulate = Color(0.854902, 0.886275, 0.945098, 0.7)
@@ -95,5 +95,5 @@ text = "Credits: Braden Chiu. Michael Chen, Taiki Shinokawa"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

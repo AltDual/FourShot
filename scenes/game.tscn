@@ -6,21 +6,3 @@
 offset_right = 640.0
 offset_bottom = 360.0
 color = Color(0.0941176, 0.121569, 0.176471, 1)
-
-[node name="Title" type="Label" parent="." unique_id=1741326438]
-offset_left = 224.0
-offset_top = 132.0
-offset_right = 416.0
-offset_bottom = 155.0
-theme_override_font_sizes/font_size = 24
-text = "Game Scene"
-horizontal_alignment = 1
-
-[node name="Hint" type="Label" parent="." unique_id=17953022]
-offset_left = 170.0
-offset_top = 178.0
-offset_right = 470.0
-offset_bottom = 201.0
-text = "Swap this out for your actual gameplay scene later."
-horizontal_alignment = 1
-autowrap_mode = 2
