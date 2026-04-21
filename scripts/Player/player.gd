@@ -10,6 +10,7 @@ var last_direction: Vector2 = Vector2.RIGHT
 func _physics_process(_delta: float) -> void:
 	process_movement()
 	var aim_dir = get_aim_direction()
+	$Gun.position.x = sign(aim_dir.x) * 10
 	process_animation(aim_dir)
 	move_and_slide()
 
