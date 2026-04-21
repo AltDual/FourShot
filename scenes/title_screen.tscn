@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctrwy30ccwnbs"]
 
-[ext_resource type="Script" uid="uid://dndbd3jg75dqf" path="res://scripts/title-scene/title_screen.gd" id="1_sa3yf"]
+[ext_resource type="Script" uid="uid://dndbd3jg75dqf" path="res://scripts/scene-scripts/title_screen.gd" id="1_sa3yf"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_sa3yf"]
 
 [node name="TitleScreen" type="Control" unique_id=849884656]

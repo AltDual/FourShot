@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dvbb8ppg1tf7h"]
 
-[ext_resource type="Script" uid="uid://c5d8d4pjjqc77" path="res://scripts/controls-scene/controls-scene.gd" id="1_5tddo"]
+[ext_resource type="Script" uid="uid://c5d8d4pjjqc77" path="res://scripts/scene-scripts/controls-scene.gd" id="1_5tddo"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="1_i2gav"]
 
 [node name="Controls" type="Control" unique_id=1676817516]
