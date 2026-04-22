@@ -6,6 +6,14 @@ const SPEED = 300.0
 var last_direction: Vector2 = Vector2.RIGHT
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var max_health: int = 100
+var current_health: int = 100
+var current_xp: int = 0
+
+func _ready():
+	# Initialize the UI when the player spawns
+	SignalBus.health_changed.emit(current_health, max_health)
+	SignalBus.xp_changed.emit(current_xp)
 
 func _physics_process(_delta: float) -> void:
 	process_movement()
@@ -42,3 +50,12 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 		animated_sprite_2d.play(prefix + "_up")
 	else:
 		animated_sprite_2d.play(prefix + "_down")
+
+func take_damage(amount: int):
+	current_health -= amount
+	# Emit the signal to tell the rest of the game the health changed
+	SignalBus.health_changed.emit(current_health, max_health)
+
+func gain_xp(amount: int):
+	current_xp += amount
+	SignalBus.xp_changed.emit(current_xp)

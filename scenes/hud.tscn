@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://bhferghnkd6qb"]
+
+[ext_resource type="Texture2D" uid="uid://cb6dow6faptvk" path="res://assets/images/Weapons/hotbar/ak67.png" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://ddx2uwg1ela48" path="res://scenes/HUDSignalListener.gd" id="1_oo0fn"]
+
+[sub_resource type="Gradient" id="Gradient_sugp2"]
+colors = PackedColorArray(0.30692267, 0.3069227, 0.3069227, 1, 0.15127608, 0.15127608, 0.15127608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jyhfs"]
+gradient = SubResource("Gradient_sugp2")
+
+[sub_resource type="Gradient" id="Gradient_tbgi4"]
+colors = PackedColorArray(0.95, 0, 0, 1, 1, 0.8186667, 0.36, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tefeu"]
+gradient = SubResource("Gradient_tbgi4")
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o6xl0"]
+gradient = SubResource("Gradient_sugp2")
+
+[sub_resource type="Gradient" id="Gradient_oo0fn"]
+colors = PackedColorArray(0, 0.7599997, 0.95, 1, 0.36, 1, 0.65866673, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ysmq"]
+gradient = SubResource("Gradient_oo0fn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(0, 0, 0, 0.14509805)
+
+[node name="HUD" type="CanvasLayer" unique_id=1139004639]
+script = ExtResource("1_oo0fn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1618942691]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TopLeft" type="VBoxContainer" parent="MarginContainer" unique_id=1870982064]
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/TopLeft" unique_id=208116315]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_jyhfs")
+texture_progress = SubResource("GradientTexture1D_tefeu")
+
+[node name="XPBar" type="TextureProgressBar" parent="MarginContainer/TopLeft" unique_id=899470959]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_o6xl0")
+texture_progress = SubResource("GradientTexture1D_5ysmq")
+
+[node name="BottomRight" type="HBoxContainer" parent="MarginContainer" unique_id=815856279]
+layout_mode = 2
+alignment = 2
+
+[node name="AmmoText" type="Label" parent="MarginContainer/BottomRight" unique_id=2129674209]
+layout_mode = 2
+size_flags_vertical = 8
+text = "x/x"
+
+[node name="Hotbar" type="VBoxContainer" parent="MarginContainer/BottomRight" unique_id=501312799]
+layout_mode = 2
+alignment = 2
+
+[node name="Slot1" type="PanelContainer" parent="MarginContainer/BottomRight/Hotbar" unique_id=1734827201]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BottomRight/Hotbar/Slot1" unique_id=850560112]
+layout_mode = 2
+
+[node name="Label" type="TextEdit" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=968841577]
+layout_mode = 2
+text = "[1]"
+
+[node name="WeaponIcon" type="TextureRect" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=1933109191]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+stretch_mode = 2
+
+[node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=191306634]
+layout_mode = 2
+text = "AK 67"
+
+[node name="Slot2" type="PanelContainer" parent="MarginContainer/BottomRight/Hotbar" unique_id=982606748]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BottomRight/Hotbar/Slot2" unique_id=674317513]
+layout_mode = 2
+
+[node name="Label" type="TextEdit" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=897516443]
+layout_mode = 2
+text = "[1]"
+
+[node name="WeaponIcon" type="TextureRect" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=1526447923]
+layout_mode = 2
+texture = ExtResource("1_ahhtf")
+
+[node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=1843637481]
+layout_mode = 2
+text = "Fireball spell"
