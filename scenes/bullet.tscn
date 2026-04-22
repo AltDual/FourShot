@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://dak44oo7wcx38"]
+
+[ext_resource type="Script" uid="uid://cwr26oaoeykq6" path="res://scripts/Gun/bullet.gd" id="1_mkf8s"]
+[ext_resource type="Texture2D" uid="uid://cs6o6oxkbbpt8" path="res://assets/images/Weapons/16x16 Pixel Shade Bullet Free.png" id="2_y25gk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5glv"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(432, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoqba"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(448, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qncy5"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(464, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tamys"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(480, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26lx3"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(496, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cfmv"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(512, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k76ql"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(528, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in4mv"]
+atlas = ExtResource("2_y25gk")
+region = Rect2(544, 272, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s437g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5glv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoqba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qncy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tamys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26lx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cfmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k76ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in4mv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Bullet" type="Node2D" unique_id=476956018]
+script = ExtResource("1_mkf8s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1471414523]
+sprite_frames = SubResource("SpriteFrames_s437g")
+frame_progress = 0.14770795
