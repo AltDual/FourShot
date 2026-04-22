@@ -6,8 +6,8 @@ extends Node
 const GRID_WIDTH := 5
 const GRID_HEIGHT := 5
 
-const MIN_ROOMS := 10
-const MAX_ROOMS := 14
+const MIN_ROOMS := 12
+const MAX_ROOMS := 15
 
 const USE_RANDOM_START_ROOM := true
 const START_ROOM_POSITION := Vector2i(2, 2)
@@ -32,6 +32,7 @@ const MAX_GENERATION_ATTEMPTS := 100
 # =========================
 var rooms: Array = []
 var current_start_pos: Vector2i
+var current_room_pos: Vector2i
 
 func _ready() -> void:
 	randomize()
@@ -56,6 +57,7 @@ func generate_dungeon() -> bool:
 	start_room.exists = true
 	start_room.room_type = "start"
 	active_rooms.append(current_start_pos)
+	current_room_pos = current_start_pos
 
 	while placed_count < target_room_count:
 		var expandable_rooms: Array[Vector2i] = []
@@ -89,6 +91,27 @@ func generate_dungeon_until_valid() -> void:
 			return
 
 	push_error("Failed to generate a valid dungeon after %d attempts." % MAX_GENERATION_ATTEMPTS)
+
+func move_to_room(direction: Vector2i) -> bool:
+	var current_room := get_room(current_room_pos)
+
+	if direction == Vector2i.UP and current_room.door_up:
+		current_room_pos += Vector2i.UP
+		return true
+	elif direction == Vector2i.DOWN and current_room.door_down:
+		current_room_pos += Vector2i.DOWN
+		return true
+	elif direction == Vector2i.LEFT and current_room.door_left:
+		current_room_pos += Vector2i.LEFT
+		return true
+	elif direction == Vector2i.RIGHT and current_room.door_right:
+		current_room_pos += Vector2i.RIGHT
+		return true
+
+	return false
+
+func get_current_room() -> RoomData:
+	return get_room(current_room_pos)
 	
 func assign_boss_room() -> bool:
 	if not REQUIRE_BOSS_ROOM:
@@ -120,7 +143,28 @@ func assign_boss_room() -> bool:
 
 	var boss_pos := valid_boss_candidates[randi() % valid_boss_candidates.size()]
 	get_room(boss_pos).room_type = "boss"
+	mark_pre_boss_room(boss_pos)
 	return true
+	
+func mark_pre_boss_room(boss_pos: Vector2i) -> void:
+	var connected := get_connected_neighbors(boss_pos)
+
+	if connected.is_empty():
+		return
+
+	var pre_boss_pos := connected[0]
+	var pre_boss_room := get_room(pre_boss_pos)
+
+	if pre_boss_room.room_type == "normal":
+		pre_boss_room.room_type = "pre_boss"
+func door_leads_to_boss(from_pos: Vector2i, direction: Vector2i) -> bool:
+	var target := from_pos + direction
+
+	if not is_in_bounds(target):
+		return false
+
+	var room := get_room(target)
+	return room.exists and room.room_type == "boss"
 	
 func is_leaf_room(pos: Vector2i) -> bool:
 	var room := get_room(pos)

@@ -10,3 +10,8 @@ var door_left: bool = false
 var door_right: bool = false
 
 var room_type: String = "normal"
+
+var visited: bool = false
+var cleared: bool = false
+var doors_locked: bool = false
+var enemies_spawned: bool = false

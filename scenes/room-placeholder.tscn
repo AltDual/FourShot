@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cncogqfcykpm4"]
+
+[ext_resource type="Script" uid="uid://bfubsrpivxap4" path="res://scripts/rooms/room-placeholder.gd" id="1_qob3t"]
+
+[node name="Control" type="Control" unique_id=307919817]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qob3t")
+
+[node name="Background" type="ColorRect" parent="." unique_id=868124261]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.33722475, 0.4928801, 0.6199539, 0.46666667)
+
+[node name="DoorUp" type="ColorRect" parent="." unique_id=902103485]
+layout_mode = 0
+offset_left = 280.0
+offset_right = 360.0
+offset_bottom = 15.0
+
+[node name="DoorDown" type="ColorRect" parent="." unique_id=92652026]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 345.0
+offset_right = 360.0
+offset_bottom = 360.0
+
+[node name="DoorLeft" type="ColorRect" parent="." unique_id=529556696]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 15.0
+offset_bottom = 220.0
+
+[node name="DoorRight" type="ColorRect" parent="." unique_id=1833122214]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 140.0
+offset_right = 640.0
+offset_bottom = 220.0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1848401903]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 20.0
+offset_right = 490.0
+offset_bottom = 97.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1080876498]
+layout_mode = 2
+
+[node name="RoomType" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1430161905]
+layout_mode = 2
+text = "Roomtype"
+
+[node name="Coords" type="Label" parent="MarginContainer/VBoxContainer" unique_id=137279618]
+layout_mode = 2
+text = "coords"
+
+[node name="Info" type="Label" parent="MarginContainer/VBoxContainer" unique_id=170477273]
+layout_mode = 2
+text = "info"

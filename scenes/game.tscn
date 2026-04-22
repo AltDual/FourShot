@@ -38,6 +38,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_uwrxv")
 text = "Go To Dungeon"
 
+[node name="DebugButton" type="Button" parent="Background/CenterContainer/MarginContainer/VBoxContainer" unique_id=229085588]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uwrxv")
+text = "Debug Dungeon Map"
+
 [node name="CenterContainer2" type="CenterContainer" parent="Background" unique_id=1447190837]
 layout_mode = 0
 offset_left = 570.0
@@ -50,4 +55,5 @@ layout_mode = 2
 text = "BACK"
 
 [connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DungeonButton" to="." method="_on_dungeon_pressed"]
+[connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DebugButton" to="." method="_on_debug_button_pressed"]
 [connection signal="pressed" from="Background/CenterContainer2/BackButton" to="." method="_on_back_button_pressed"]
