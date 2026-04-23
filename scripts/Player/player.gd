@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 150.0
 
-var last_direction: Vector2 = Vector2.RIGHT
+#var last_direction: Vector2 = Vector2.RIGHT
 #var movement_locked: bool = false
 #var require_input_release: bool = false
 
@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 	process_movement()
 
 	var aim_dir = get_aim_direction()
-	$Gun.position.x = sign(aim_dir.x) * 10
+	$Gun.position.x = sign(aim_dir.x) * 3.5
 
 	process_animation(aim_dir)
 	move_and_slide()
@@ -49,7 +49,7 @@ func process_movement() -> void:
 
 	if direction != Vector2.ZERO:
 		velocity = direction * SPEED
-		last_direction = direction
+		#last_direction = direction
 	else:
 		velocity = Vector2.ZERO
 
