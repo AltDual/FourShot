@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gj1e2kw2oaxg"
-path="res://.godot/imported/hallway 1.jpg-d1ddb40a49ed726ade3dabc81c4ee10f.ctex"
+uid="uid://cyykllkih225r"
+path="res://.godot/imported/atlas_walls_high-16x32.png-982a9862dd958f412f9f71a42f5667f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Testing/hallway 1.jpg"
-dest_files=["res://.godot/imported/hallway 1.jpg-d1ddb40a49ed726ade3dabc81c4ee10f.ctex"]
+source_file="res://assets/images/Tileset/atlas_walls_high-16x32.png"
+dest_files=["res://.godot/imported/atlas_walls_high-16x32.png-982a9862dd958f412f9f71a42f5667f7.ctex"]
 
 [params]
 

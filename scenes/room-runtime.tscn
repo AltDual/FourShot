@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6a0setdil0am"]
 
 [ext_resource type="Script" uid="uid://ckttbwf6ok0tm" path="res://scripts/rooms/room-runtime.gd" id="1_l82oc"]
+[ext_resource type="PackedScene" uid="uid://fnps4jd2qgiv" path="res://scenes/room_tile_test.tscn" id="2_idn60"]
 [ext_resource type="Texture2D" uid="uid://bnexxu20nmicx" path="res://assets/images/Testing/checkerboard 16x9.jpg" id="2_kqwh4"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="3_if7kp"]
 
@@ -22,7 +23,10 @@ size = Vector2(1180, 620)
 [node name="RoomRuntime" type="Node2D" unique_id=1001241366]
 script = ExtResource("1_l82oc")
 
+[node name="Floor2" parent="." unique_id=2049295722 instance=ExtResource("2_idn60")]
+
 [node name="Floor" type="TextureRect" parent="." unique_id=34178181]
+visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("2_kqwh4")
