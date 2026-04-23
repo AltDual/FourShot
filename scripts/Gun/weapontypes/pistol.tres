@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://ck6ojmknptdwo"]
+
+[ext_resource type="Script" uid="uid://ex5br4mqe7f1" path="res://resources/WeaponResource.gd" id="1_ldmvr"]
+[ext_resource type="Texture2D" uid="uid://c5q7b5f3e7utr" path="res://assets/images/Weapons/glock21/side.png" id="2_3hadw"]
+
+[resource]
+script = ExtResource("1_ldmvr")
+weapon_name = "Glock-21"
+damage = 40
+fire_rate = 0.6
+mag_size = 8
+reload_time = 0.8
+pattern = "single"
+spread_angle = 0.0
+weapon_sprite_side = ExtResource("2_3hadw")
+metadata/_custom_type_script = "uid://ex5br4mqe7f1"

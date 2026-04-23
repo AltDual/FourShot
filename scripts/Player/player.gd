@@ -27,6 +27,9 @@ func _ready():
 	weapon_inventory = starting_weapons.duplicate()
 	if weapon_inventory[0] != null:
 		equip_weapon(0)
+		
+	# --- CHANGED: Use call_deferred to wait for the HUD to be ready ---
+	SignalBus.hotbar_updated.emit.call_deferred(weapon_inventory, active_weapon_index)
 
 func _physics_process(_delta: float) -> void:
 	var _move_input := Input.get_vector("left", "right", "up", "down")
@@ -55,16 +58,16 @@ func _physics_process(_delta: float) -> void:
 
 # --- NEW METHODS ---
 func process_weapon_switching() -> void:
-	# You'll need to add "equip_slot_1" and "equip_slot_2" to your Input Map
 	if Input.is_action_just_pressed("equip_slot_1") and active_weapon_index != 0:
-		equip_weapon(0)
+		equip_weapon(0) # 0 is the first array slot (AK67)
 	elif Input.is_action_just_pressed("equip_slot_2") and active_weapon_index != 1:
-		equip_weapon(1)
+		equip_weapon(1) # 1 is the second array slot (Pistol)
 
 func equip_weapon(index: int) -> void:
 	if weapon_inventory[index] != null:
 		active_weapon_index = index
 		gun.equip(weapon_inventory[index])
+		SignalBus.hotbar_updated.emit(weapon_inventory, active_weapon_index)
 
 func get_aim_direction() -> Vector2:
 	var mouse_pos = get_global_mouse_position()

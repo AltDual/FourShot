@@ -6,6 +6,7 @@ signal ammo_changed(current: int, max: int) # Useful for your Ammo HUD later
 @export var weapon_data: WeaponResource
 const BULLET = preload("res://scenes/bullet.tscn")
 @onready var muzzle: Marker2D = $Marker2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 var can_fire: bool = true
 var is_reloading: bool = false
@@ -42,8 +43,10 @@ func equip(data: WeaponResource) -> void:
 	can_fire = true
 	# Give full ammo on initial pickup, or you can track ammo per inventory slot later
 	current_ammo = weapon_data.mag_size 
-	ammo_changed.emit(current_ammo, weapon_data.mag_size)
-	weapon_switched.emit(weapon_data)
+	# --- NEW: Update the visual sprite to match the weapon data ---
+	if sprite and weapon_data.weapon_sprite_side:
+		sprite.texture = weapon_data.weapon_sprite_side
+	SignalBus.ammo_changed.emit.call_deferred(current_ammo, weapon_data.mag_size)
 
 func reload() -> void:
 	is_reloading = true
@@ -52,10 +55,12 @@ func reload() -> void:
 	
 	current_ammo = weapon_data.mag_size
 	is_reloading = false
-	ammo_changed.emit(current_ammo, weapon_data.mag_size)
+	SignalBus.ammo_changed.emit.call_deferred(current_ammo, weapon_data.mag_size)
 
 func fire() -> void:
 	can_fire = false
+	current_ammo -= 1
+	SignalBus.ammo_changed.emit.call_deferred(current_ammo, weapon_data.mag_size)
 	
 	match weapon_data.pattern:
 		"single":

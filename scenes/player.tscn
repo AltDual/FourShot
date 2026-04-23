@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cm2hbs0ugh64x" path="res://assets/images/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgfmrummuxwsx" path="res://scripts/Player/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://ex5br4mqe7f1" path="res://resources/WeaponResource.gd" id="2_tuyoq"]
+[ext_resource type="Resource" uid="uid://ck6ojmknptdwo" path="res://scripts/Gun/weapontypes/pistol.tres" id="3_fjrip"]
 [ext_resource type="PackedScene" uid="uid://tbfwl67iermv" path="res://scenes/gun.tscn" id="3_qhqgy"]
+[ext_resource type="Resource" uid="uid://dylyk7mswy54q" path="res://scripts/Gun/weapontypes/ak67.tres" id="4_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -428,6 +431,7 @@ height = 8.0
 [node name="Player" type="CharacterBody2D" unique_id=1252588381]
 scale = Vector2(4, 4)
 script = ExtResource("1_g2els")
+starting_weapons = Array[ExtResource("2_tuyoq")]([ExtResource("4_smehm"), ExtResource("3_fjrip")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1717828801]
 scale = Vector2(0.5, 0.5)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://dylyk7mswy54q"]
+
+[ext_resource type="Script" uid="uid://ex5br4mqe7f1" path="res://resources/WeaponResource.gd" id="1_ov0ui"]
+[ext_resource type="Texture2D" uid="uid://d3cspsxn7ciql" path="res://assets/images/Weapons/ak67/side.png" id="2_temnn"]
+
+[resource]
+script = ExtResource("1_ov0ui")
+weapon_name = "HK-67"
+damage = 15
+fire_rate = 0.15
+reload_time = 2.5
+pattern = "single"
+spread_angle = 5.0
+is_automatic = true
+weapon_sprite_side = ExtResource("2_temnn")
+metadata/_custom_type_script = "uid://ex5br4mqe7f1"

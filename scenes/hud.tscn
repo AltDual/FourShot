@@ -67,28 +67,40 @@ alignment = 2
 [node name="AmmoText" type="Label" parent="MarginContainer/BottomRight" unique_id=2129674209]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.8820869, 0.76287454, 1.540184e-06, 1)
 theme_override_fonts/font = ExtResource("2_5ysmq")
 text = "x/x"
+
+[node name="Control" type="Control" parent="MarginContainer/BottomRight" unique_id=199065252]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="Hotbar" type="VBoxContainer" parent="MarginContainer/BottomRight" unique_id=501312799]
 layout_mode = 2
 alignment = 2
 
 [node name="Slot1" type="PanelContainer" parent="MarginContainer/BottomRight/Hotbar" unique_id=1734827201]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BottomRight/Hotbar/Slot1" unique_id=850560112]
 layout_mode = 2
 
-[node name="Label" type="TextEdit" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=968841577]
+[node name="Label" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=698525663]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("2_5ysmq")
+theme_override_font_sizes/font_size = 8
 text = "[1]"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="WeaponIcon" type="TextureRect" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=1933109191]
 layout_mode = 2
 texture = ExtResource("1_ahhtf")
-stretch_mode = 2
+stretch_mode = 5
 
 [node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=191306634]
 layout_mode = 2
@@ -96,21 +108,29 @@ theme_override_fonts/font = ExtResource("2_5ysmq")
 text = "AK 67"
 
 [node name="Slot2" type="PanelContainer" parent="MarginContainer/BottomRight/Hotbar" unique_id=982606748]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BottomRight/Hotbar/Slot2" unique_id=674317513]
 layout_mode = 2
 
-[node name="Label" type="TextEdit" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=897516443]
+[node name="Label" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=315141969]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-text = "[1]"
+theme_override_colors/font_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("2_5ysmq")
+theme_override_font_sizes/font_size = 8
+text = "[2]"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [node name="WeaponIcon" type="TextureRect" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=1526447923]
 layout_mode = 2
 texture = ExtResource("1_ahhtf")
+stretch_mode = 5
 
 [node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=1843637481]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5ysmq")
-text = "Fireball spell"
+text = "secondary"
