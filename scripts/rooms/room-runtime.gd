@@ -2,15 +2,8 @@ extends Node2D
 
 const DOOR_REENABLE_DELAY := 0.5
 
-const ROOM_WIDTH := 1280
-const ROOM_HEIGHT := 720
-
-# Adjust these to match your actual hallway sizes.
-const HALLWAY_HORIZONTAL_LENGTH := 700
-const HALLWAY_HORIZONTAL_HEIGHT := 100
-
-const HALLWAY_VERTICAL_WIDTH := 100
-const HALLWAY_VERTICAL_LENGTH := 400
+@export var room_width: int = 1280
+@export var room_height: int = 720
 
 signal door_used(direction: Vector2i)
 
@@ -26,12 +19,6 @@ signal door_used(direction: Vector2i)
 @onready var spawn_from_right: Marker2D = $SpawnFromRight
 
 @onready var debug_label: Label = $DebugLabel
-
-@onready var camera_zone_room: Area2D = $CameraZoneRoom
-@onready var camera_zone_up: Area2D = $CameraZoneUp
-@onready var camera_zone_down: Area2D = $CameraZoneDown
-@onready var camera_zone_left: Area2D = $CameraZoneLeft
-@onready var camera_zone_right: Area2D = $CameraZoneRight
 
 var room_data: RoomData
 var room_grid_pos: Vector2i
@@ -51,9 +38,18 @@ func setup(
 	player = player_ref
 
 	position_player(entry_direction)
-	set_camera_to_room_zone()
+	apply_camera_limits()
 	update_room_state()
 	disable_doors_temporarily()
+
+func apply_camera_limits() -> void:
+	if player == null:
+		return
+	if not player.has_node("Camera2D"):
+		return
+
+	var camera: Camera2D = player.get_node("Camera2D")
+	camera.apply_room_limits(Vector2.ZERO, Vector2(room_width, room_height))
 
 func update_room_state() -> void:
 	if room_data == null:
@@ -107,122 +103,6 @@ func position_player(entry_direction: Vector2i) -> void:
 
 func refresh() -> void:
 	update_room_state()
-
-func get_game_camera():
-	var root = get_tree().current_scene
-	if root == null:
-		return null
-	if not root.has_node("GameCamera"):
-		return null
-	return root.get_node("GameCamera")
-
-func set_camera_rect(rect: Rect2) -> void:
-	var camera = get_game_camera()
-	if camera == null:
-		return
-	camera.set_camera_rect(rect)
-
-func set_camera_limits(left: float, top: float, right: float, bottom: float) -> void:
-	var camera = get_game_camera()
-	if camera == null:
-		return
-	camera.set_camera_limits(left, top, right, bottom)
-
-func set_camera_to_room_zone() -> void:
-	set_camera_rect(get_room_rect())
-
-func set_camera_to_up_hallway_zone() -> void:
-	var room_rect := get_room_rect()
-	var hall_rect := get_up_hallway_rect()
-
-	set_camera_limits(
-		hall_rect.position.x,
-		hall_rect.position.y,
-		hall_rect.position.x + hall_rect.size.x,
-		room_rect.position.y + room_rect.size.y
-	)
-
-func set_camera_to_down_hallway_zone() -> void:
-	var room_rect := get_room_rect()
-	var hall_rect := get_down_hallway_rect()
-
-	set_camera_limits(
-		hall_rect.position.x,
-		room_rect.position.y,
-		hall_rect.position.x + hall_rect.size.x,
-		hall_rect.position.y + hall_rect.size.y
-	)
-
-func set_camera_to_left_hallway_zone() -> void:
-	var room_rect := get_room_rect()
-	var hall_rect := get_left_hallway_rect()
-
-	set_camera_limits(
-		hall_rect.position.x,
-		hall_rect.position.y,
-		room_rect.position.x + room_rect.size.x,
-		hall_rect.position.y + hall_rect.size.y
-	)
-
-func set_camera_to_right_hallway_zone() -> void:
-	var room_rect := get_room_rect()
-	var hall_rect := get_right_hallway_rect()
-
-	set_camera_limits(
-		room_rect.position.x,
-		hall_rect.position.y,
-		hall_rect.position.x + hall_rect.size.x,
-		hall_rect.position.y + hall_rect.size.y
-	)
-	
-	
-
-func get_room_rect() -> Rect2:
-	return Rect2(global_position, Vector2(ROOM_WIDTH, ROOM_HEIGHT))
-
-func get_up_hallway_rect() -> Rect2:
-	return Rect2(
-		global_position + Vector2((ROOM_WIDTH - HALLWAY_VERTICAL_WIDTH) * 0.5, -HALLWAY_VERTICAL_LENGTH),
-		Vector2(HALLWAY_VERTICAL_WIDTH, HALLWAY_VERTICAL_LENGTH)
-	)
-
-func get_down_hallway_rect() -> Rect2:
-	return Rect2(
-		global_position + Vector2((ROOM_WIDTH - HALLWAY_VERTICAL_WIDTH) * 0.5, ROOM_HEIGHT),
-		Vector2(HALLWAY_VERTICAL_WIDTH, HALLWAY_VERTICAL_LENGTH)
-	)
-
-func get_left_hallway_rect() -> Rect2:
-	return Rect2(
-		global_position + Vector2(-HALLWAY_HORIZONTAL_LENGTH, (ROOM_HEIGHT - HALLWAY_HORIZONTAL_HEIGHT) * 0.5),
-		Vector2(HALLWAY_HORIZONTAL_LENGTH, HALLWAY_HORIZONTAL_HEIGHT)
-	)
-
-func get_right_hallway_rect() -> Rect2:
-	return Rect2(
-		global_position + Vector2(ROOM_WIDTH, (ROOM_HEIGHT - HALLWAY_HORIZONTAL_HEIGHT) * 0.5),
-		Vector2(HALLWAY_HORIZONTAL_LENGTH, HALLWAY_HORIZONTAL_HEIGHT)
-	)
-
-func _on_camera_zone_room_body_entered(body: Node) -> void:
-	if body == player:
-		set_camera_to_room_zone()
-
-func _on_camera_zone_up_body_entered(body: Node) -> void:
-	if body == player:
-		set_camera_to_up_hallway_zone()
-
-func _on_camera_zone_down_body_entered(body: Node) -> void:
-	if body == player:
-		set_camera_to_down_hallway_zone()
-
-func _on_camera_zone_left_body_entered(body: Node) -> void:
-	if body == player:
-		set_camera_to_left_hallway_zone()
-
-func _on_camera_zone_right_body_entered(body: Node) -> void:
-	if body == player:
-		set_camera_to_right_hallway_zone()
 
 func _on_door_up_body_entered(body: Node) -> void:
 	if body == player and door_up.monitoring:

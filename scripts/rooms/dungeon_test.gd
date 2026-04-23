@@ -8,7 +8,7 @@ const ROOM_TRANSITION_COOLDOWN := 0.35
 @onready var room_view: Node2D = $RoomView
 @onready var map_overlay = $MapCanvasLayer/MapOverlay
 @onready var player: CharacterBody2D = $Player
-@onready var game_camera = $GameCamera
+#@onready var game_camera = $GameCamera
 
 var current_room_instance: Node2D
 var pending_entry_direction: Vector2i = Vector2i.ZERO
@@ -16,7 +16,7 @@ var is_transitioning: bool = false
 var can_transition_rooms: bool = true
 
 func _ready() -> void:
-	game_camera.set_target(player)
+	#game_camera.set_target(player)
 	map_overlay.set_references(dungeon, player)
 	load_current_room()
 
