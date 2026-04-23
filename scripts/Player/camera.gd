@@ -1,24 +1,20 @@
 extends Camera2D
 
-@export var room_width: int = 1280
-@export var room_height: int = 720
-
-@export var view_width: int = 640
-@export var view_height: int = 360
+# Separate padding for horizontal (X) and vertical (Y) walls
+const PADDING_X = 11
+const PADDING_Y = 16
 
 func _ready() -> void:
 	make_current()
-	zoom = Vector2.ONE
-
 	position_smoothing_enabled = false
 	drag_horizontal_enabled = false
 	drag_vertical_enabled = false
-	limit_enabled = true
-
-	apply_room_limits(Vector2.ZERO, Vector2(room_width, room_height))
 
 func apply_room_limits(room_top_left: Vector2, room_size: Vector2) -> void:
-	limit_left = int(room_top_left.x)
-	limit_top = int(room_top_left.y)
-	limit_right = int(room_top_left.x + room_size.x)
-	limit_bottom = int(room_top_left.y + room_size.y)
+	# Subtract/add PADDING_X for the left and right sides
+	limit_left = int(room_top_left.x - PADDING_X)
+	limit_right = int(room_top_left.x + room_size.x + PADDING_X)
+	
+	# Subtract/add PADDING_Y for the top and bottom sides
+	limit_top = int(room_top_left.y - PADDING_Y)
+	limit_bottom = int(room_top_left.y + room_size.y + PADDING_Y)
