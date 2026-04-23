@@ -1,6 +1,6 @@
 extends Control
 
-const MAIN_SCENE := "res://scenes/dungeon-test.tscn"
+const MAIN_SCENE := "res://scenes/main.tscn"
 const TITLE_SCREEN := "res://scenes/title_screen.tscn"
 const DEBUG_MAP := "res://scenes/DebugDungeonMap.tscn"
 

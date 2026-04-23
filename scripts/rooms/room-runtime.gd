@@ -20,38 +20,6 @@ signal door_used(direction: Vector2i)
 
 @onready var debug_label: Label = $DebugLabel
 
-# --- TILEMAP SETTINGS ---
-@onready var wall_tilemap: TileMapLayer = $WallTileMap 
-@onready var floor_tilemap: TileMapLayer = $FloorTileMap 
-
-# --- WALL CONFIGURATION ---
-const WALL_SOURCE_ID = 0
-const WALL_ATLAS_COORDS_TOP = Vector2i(2,3)
-const WALL_ATLAS_COORDS_BOTTOM = Vector2i(2,3)
-const WALL_ATLAS_COORDS_LEFT = Vector2i(0,1)
-const WALL_ATLAS_COORDS_RIGHT = Vector2i(0,1)
-
-# Put the start and end coordinates of your gap in the arrays
-const DOOR_UP_CELLS: Array[Vector2i] = [Vector2i(36, -1), Vector2i(44,-1)] 
-const DOOR_DOWN_CELLS: Array[Vector2i] = [Vector2i(36, 45), Vector2i(44,45)]
-const DOOR_LEFT_CELLS: Array[Vector2i] = [Vector2i(-1, 18), Vector2i(-1, 27)]
-const DOOR_RIGHT_CELLS: Array[Vector2i] = [Vector2i(80, 18), Vector2i(80, 27)]
-
-# --- FLOOR CONFIGURATION ---
-const FLOOR_SOURCE_ID = 0
-const FLOOR_ATLAS_COORDS_TOP = Vector2i(5,1)
-const FLOOR_ATLAS_COORDS_BOTTOM = Vector2i(5,0)
-const FLOOR_ATLAS_COORDS_LEFT = Vector2i(0,0)
-const FLOOR_ATLAS_COORDS_RIGHT = Vector2i(0,0)
-#const FLOOR_ATLAS_COORDS_MAIN = Vector2i(4, 0)
-
-# The floor thresholds/doormats for the 4 doorways
-const FLOOR_UP_CELLS: Array[Vector2i] = [Vector2i(36, 0), Vector2i(44,0)] 
-const FLOOR_DOWN_CELLS: Array[Vector2i] = [Vector2i(36, 44), Vector2i(44,44)]
-const FLOOR_LEFT_CELLS: Array[Vector2i] = [Vector2i(-1, 18), Vector2i(0, 27)]
-const FLOOR_RIGHT_CELLS: Array[Vector2i] = [Vector2i(79, 18), Vector2i(80, 27)]
-# ----------------------------------
-
 var room_data: RoomData
 var room_grid_pos: Vector2i
 var dungeon = null
@@ -83,44 +51,6 @@ func apply_camera_limits() -> void:
 	var camera: Camera2D = player.get_node("Camera2D")
 	camera.apply_room_limits(global_position, Vector2(room_width, room_height))
 
-# Universal Helper: Fills the rectangular gap between the first and last Vector2i in ANY array
-func fill_area_from_array(tilemap: TileMapLayer, cells: Array[Vector2i], source_id: int, atlas_coords: Vector2i) -> void:
-	if cells.is_empty() or tilemap == null: return
-	
-	var start_cell = cells[0]
-	var end_cell = cells[-1] 
-	
-	var min_x = min(start_cell.x, end_cell.x)
-	var max_x = max(start_cell.x, end_cell.x)
-	var min_y = min(start_cell.y, end_cell.y)
-	var max_y = max(start_cell.y, end_cell.y)
-	
-	for x in range(min_x, max_x + 1):
-		for y in range(min_y, max_y + 1):
-			tilemap.set_cell(Vector2i(x, y), source_id, atlas_coords)
-
-func update_room_tiles() -> void:
-	if room_data == null: return
-
-	# ONLY overwrite the tilemap if the door DOES NOT exist (acting as a plug).
-	# If the door DOES exist, it skips this and leaves your original editor art intact!
-	
-	if not room_data.door_up: 
-		fill_area_from_array(wall_tilemap, DOOR_UP_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_TOP)
-		fill_area_from_array(floor_tilemap, FLOOR_UP_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_TOP)
-		
-	if not room_data.door_down: 
-		fill_area_from_array(wall_tilemap, DOOR_DOWN_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_BOTTOM)
-		fill_area_from_array(floor_tilemap, FLOOR_DOWN_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_BOTTOM)
-		
-	if not room_data.door_left: 
-		fill_area_from_array(wall_tilemap, DOOR_LEFT_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_LEFT)
-		fill_area_from_array(floor_tilemap, FLOOR_LEFT_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_LEFT)
-		
-	if not room_data.door_right: 
-		fill_area_from_array(wall_tilemap, DOOR_RIGHT_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_RIGHT)
-		fill_area_from_array(floor_tilemap, FLOOR_RIGHT_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_RIGHT)
-
 func update_room_state() -> void:
 	if room_data == null:
 		return
@@ -141,9 +71,6 @@ func update_room_state() -> void:
 		str(room_data.doors_locked),
 		str(room_data.cleared)
 	]
-
-	# Draw plugs if necessary
-	update_room_tiles()
 
 func disable_doors_temporarily() -> void:
 	door_up.monitoring = false
