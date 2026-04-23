@@ -17,9 +17,6 @@ size = Vector2(3, 176.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idn60"]
 size = Vector2(3.5, 179)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8ig0"]
-size = Vector2(1180, 620)
-
 [node name="RoomRuntime" type="Node2D" unique_id=1001241366]
 script = ExtResource("1_l82oc")
 
@@ -35,6 +32,7 @@ texture = ExtResource("2_kqwh4")
 
 [node name="DoorUp" type="Area2D" parent="." unique_id=1661562704]
 position = Vector2(640, 0)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorUp" unique_id=499763914]
 position = Vector2(0, -13)
@@ -44,6 +42,7 @@ shape = SubResource("RectangleShape2D_l82oc")
 
 [node name="DoorDown" type="Area2D" parent="." unique_id=63514209]
 position = Vector2(640, 720)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorDown" unique_id=895264294]
 position = Vector2(0, 5)
@@ -53,6 +52,7 @@ shape = SubResource("RectangleShape2D_kqwh4")
 
 [node name="DoorLeft" type="Area2D" parent="." unique_id=64939703]
 position = Vector2(0, 360)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorLeft" unique_id=941803917]
 shape = SubResource("RectangleShape2D_tki4u")
@@ -61,6 +61,7 @@ shape = SubResource("RectangleShape2D_tki4u")
 
 [node name="DoorRight" type="Area2D" parent="." unique_id=346701194]
 position = Vector2(1280, 360)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorRight" unique_id=76026850]
 shape = SubResource("RectangleShape2D_idn60")
@@ -89,14 +90,7 @@ offset_right = 239.0
 offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("3_if7kp")
 
-[node name="CameraZoneRoom" type="Area2D" parent="." unique_id=1672434119]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraZoneRoom" unique_id=1595091129]
-position = Vector2(640, 360)
-shape = SubResource("RectangleShape2D_s8ig0")
-
 [connection signal="body_entered" from="DoorUp" to="." method="_on_door_up_body_entered"]
 [connection signal="body_entered" from="DoorDown" to="." method="_on_door_down_body_entered"]
 [connection signal="body_entered" from="DoorLeft" to="." method="_on_door_left_body_entered"]
 [connection signal="body_entered" from="DoorRight" to="." method="_on_door_right_body_entered"]
-[connection signal="body_entered" from="CameraZoneRoom" to="." method="_on_camera_zone_room_body_entered"]

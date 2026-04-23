@@ -150,8 +150,8 @@ func _on_body_exited_detection(body: Node) -> void:
 func _update_animation() -> void:
 	if velocity != Vector2.ZERO:
 		sprite.play("walk")
-	elif state == State.SHOOT:
-		sprite.play("shoot")
+	#elif state == State.SHOOT:
+		#sprite.play("shoot")
 	else:
 		sprite.play("idle")
  

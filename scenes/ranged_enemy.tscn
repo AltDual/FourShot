@@ -19,6 +19,30 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_u2kgh")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqoy7"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ls4a"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w150n"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvjff"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r77u"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3aa2"]
+atlas = ExtResource("1_u2kgh")
+region = Rect2(160, 96, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_nqoy7"]
 animations = [{
 "frames": [{
@@ -37,25 +61,57 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqoy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ls4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w150n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvjff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r77u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3aa2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rs3ab"]
+radius = 8.062258
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ls4a"]
 radius = 202.0
 
 [node name="Ranged_Enemy" type="CharacterBody2D" unique_id=688229520]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_rs3ab")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2058940189]
 sprite_frames = SubResource("SpriteFrames_nqoy7")
-animation = &"idle"
+animation = &"walk"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1017784458]
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=696663087]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=829269521]
+shape = SubResource("CircleShape2D_rs3ab")
+debug_color = Color(0.8303168, 0.0014510459, 0.945857, 0.41960785)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1008764717]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1961643901]
 shape = SubResource("CircleShape2D_2ls4a")
