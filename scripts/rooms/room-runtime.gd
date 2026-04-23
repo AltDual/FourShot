@@ -49,7 +49,7 @@ func apply_camera_limits() -> void:
 		return
 
 	var camera: Camera2D = player.get_node("Camera2D")
-	camera.apply_room_limits(Vector2.ZERO, Vector2(room_width, room_height))
+	camera.apply_room_limits(global_position, Vector2(room_width, room_height))
 
 func update_room_state() -> void:
 	if room_data == null:

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cm2hbs0ugh64x" path="res://assets/images/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgfmrummuxwsx" path="res://scripts/Player/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://tbfwl67iermv" path="res://scenes/gun.tscn" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dpn5181crkhhd" path="res://scripts/Player/camera.gd" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -441,3 +442,6 @@ position = Vector2(3.25, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185981517]
 position = Vector2(0.25, -1.5)
 shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1837531102]
+script = ExtResource("4_dqkch")
