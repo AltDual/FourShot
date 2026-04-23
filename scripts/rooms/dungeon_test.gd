@@ -6,7 +6,7 @@ const ROOM_TRANSITION_COOLDOWN := 0.35
 
 @onready var dungeon = $DungeonGenerator
 @onready var room_view: Node2D = $RoomView
-@onready var map_overlay = $MapOverlay
+@onready var map_overlay = $MapCanvasLayer/MapOverlay
 @onready var player: CharacterBody2D = $Player
 
 var current_room_instance: Node2D
@@ -15,7 +15,7 @@ var is_transitioning: bool = false
 var can_transition_rooms: bool = true
 
 func _ready() -> void:
-	map_overlay.set_dungeon(dungeon)
+	map_overlay.set_references(dungeon, player)
 	load_current_room()
 
 func _process(_delta: float) -> void:

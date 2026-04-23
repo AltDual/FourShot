@@ -1,23 +1,35 @@
 extends Control
 
-const CELL_SIZE := 48
-const ROOM_SIZE := 20
-const DOOR_LENGTH := 12
-const LINE_WIDTH := 3
-const PANEL_PADDING := 40
+const ROOM_WORLD_WIDTH := 1280.0
+const ROOM_WORLD_HEIGHT := 720.0
+
+const CELL_SPACING_X := 56.0
+const CELL_SPACING_Y := 36.0
+
+const ROOM_MAP_WIDTH := 32.0
+const ROOM_MAP_HEIGHT := 18.0
+
+const DOOR_LENGTH := 10.0
+const LINE_WIDTH := 2.0
 
 var dungeon = null
+var player: CharacterBody2D = null
 
 func _ready() -> void:
 	visible = false
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-func set_dungeon(dungeon_ref) -> void:
+func set_references(dungeon_ref, player_ref: CharacterBody2D) -> void:
 	dungeon = dungeon_ref
+	player = player_ref
 	queue_redraw()
 
 func refresh() -> void:
 	queue_redraw()
+
+func _process(_delta: float) -> void:
+	if visible:
+		queue_redraw()
 
 func _draw() -> void:
 	if dungeon == null:
@@ -37,26 +49,27 @@ func _draw() -> void:
 
 			if not room.exists:
 				continue
-
 			if not room.visited:
 				continue
 
-			draw_room(pos, room, map_rect.position)
+			draw_room(pos, room, map_rect)
 
-func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
-	var center := grid_to_screen(grid_pos, map_origin)
-	var half := ROOM_SIZE * 0.5
+	draw_player_marker(map_rect)
+
+func draw_room(grid_pos: Vector2i, room: RoomData, map_rect: Rect2) -> void:
+	var center := grid_to_screen(grid_pos, map_rect)
+	var half_w := ROOM_MAP_WIDTH * 0.5
+	var half_h := ROOM_MAP_HEIGHT * 0.5
 
 	var room_color := Color(0.85, 0.85, 0.85)
-
 	if room.room_type == "start":
 		room_color = Color(0.2, 0.9, 0.2)
 	elif room.room_type == "boss":
 		room_color = Color(0.9, 0.2, 0.2)
 
 	var rect := Rect2(
-		center - Vector2(half, half),
-		Vector2(ROOM_SIZE, ROOM_SIZE)
+		center - Vector2(half_w, half_h),
+		Vector2(ROOM_MAP_WIDTH, ROOM_MAP_HEIGHT)
 	)
 
 	draw_rect(rect, room_color)
@@ -68,8 +81,8 @@ func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
 			up_color = Color(1.0, 0.65, 0.15)
 
 		draw_line(
-			center + Vector2(0, -half),
-			center + Vector2(0, -half - DOOR_LENGTH),
+			center + Vector2(0, -half_h),
+			center + Vector2(0, -half_h - DOOR_LENGTH),
 			up_color,
 			LINE_WIDTH
 		)
@@ -80,8 +93,8 @@ func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
 			down_color = Color(1.0, 0.65, 0.15)
 
 		draw_line(
-			center + Vector2(0, half),
-			center + Vector2(0, half + DOOR_LENGTH),
+			center + Vector2(0, half_h),
+			center + Vector2(0, half_h + DOOR_LENGTH),
 			down_color,
 			LINE_WIDTH
 		)
@@ -92,8 +105,8 @@ func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
 			left_color = Color(1.0, 0.65, 0.15)
 
 		draw_line(
-			center + Vector2(-half, 0),
-			center + Vector2(-half - DOOR_LENGTH, 0),
+			center + Vector2(-half_w, 0),
+			center + Vector2(-half_w - DOOR_LENGTH, 0),
 			left_color,
 			LINE_WIDTH
 		)
@@ -104,8 +117,8 @@ func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
 			right_color = Color(1.0, 0.65, 0.15)
 
 		draw_line(
-			center + Vector2(half, 0),
-			center + Vector2(half + DOOR_LENGTH, 0),
+			center + Vector2(half_w, 0),
+			center + Vector2(half_w + DOOR_LENGTH, 0),
 			right_color,
 			LINE_WIDTH
 		)
@@ -125,22 +138,38 @@ func draw_room(grid_pos: Vector2i, room: RoomData, map_origin: Vector2) -> void:
 		)
 
 	if grid_pos == dungeon.current_room_pos:
-		draw_circle(center, 8.0, Color.BLACK)
-		draw_circle(center, 5.0, Color.YELLOW)
+		draw_circle(center, 6.0, Color.BLACK)
+		draw_circle(center, 4.0, Color.YELLOW)
 
-func get_map_rect() -> Rect2:
-	var map_pixel_size := Vector2(
-		(dungeon.GRID_WIDTH - 1) * CELL_SIZE + ROOM_SIZE,
-		(dungeon.GRID_HEIGHT - 1) * CELL_SIZE + ROOM_SIZE
+func draw_player_marker(map_rect: Rect2) -> void:
+	if player == null:
+		return
+
+	var current_room_center := grid_to_screen(dungeon.current_room_pos, map_rect)
+
+	var local_x: float = clamp(player.global_position.x / ROOM_WORLD_WIDTH, 0.0, 1.0)
+	var local_y: float = clamp(player.global_position.y / ROOM_WORLD_HEIGHT, 0.0, 1.0)
+
+	var marker_offset := Vector2(
+		(local_x - 0.5) * ROOM_MAP_WIDTH,
+		(local_y - 0.5) * ROOM_MAP_HEIGHT
 	)
 
-	var panel_size := map_pixel_size + Vector2(PANEL_PADDING * 2, PANEL_PADDING * 2)
-	var panel_pos := (size - panel_size) * 0.5
+	var marker_pos := current_room_center + marker_offset
 
+	draw_circle(marker_pos, 4.0, Color.BLACK)
+	draw_circle(marker_pos, 2.5, Color(1.0, 1.0, 0.3))
+
+func get_map_rect() -> Rect2:
+	var panel_size := Vector2(460, 320)
+	var panel_pos := (size - panel_size) * 0.5
 	return Rect2(panel_pos, panel_size)
 
-func grid_to_screen(grid_pos: Vector2i, map_origin: Vector2) -> Vector2:
-	return map_origin + Vector2(PANEL_PADDING, PANEL_PADDING) + Vector2(
-		grid_pos.x * CELL_SIZE + ROOM_SIZE * 0.5,
-		grid_pos.y * CELL_SIZE + ROOM_SIZE * 0.5
+func grid_to_screen(grid_pos: Vector2i, map_rect: Rect2) -> Vector2:
+	var current_pos: Vector2i = dungeon.current_room_pos
+	var map_center := map_rect.position + map_rect.size * 0.5
+
+	return map_center + Vector2(
+		(grid_pos.x - current_pos.x) * CELL_SPACING_X,
+		(grid_pos.y - current_pos.y) * CELL_SPACING_Y
 	)

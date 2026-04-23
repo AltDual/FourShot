@@ -32,8 +32,13 @@ func setup(new_room_data: RoomData, new_grid_pos: Vector2i, dungeon_ref, entry_d
 
 	position_player(entry_direction)
 
-	var camera := player.get_node("Camera2D")
-	camera.set_room_limits(Vector2.ZERO, Vector2(ROOM_WIDTH, ROOM_HEIGHT))
+	print("Player node: ", player)
+	print("Has Camera2D: ", player.has_node("Camera2D"))
+
+	var camera = player.get_node("Camera2D")
+	print("Camera node found: ", camera)
+
+	camera.set_room_limits(Vector2(0, 0), Vector2(ROOM_WIDTH, ROOM_HEIGHT))
 
 	update_room_state()
 	disable_doors_temporarily()
@@ -87,6 +92,10 @@ func position_player(entry_direction: Vector2i) -> void:
 		player.global_position = spawn_from_right.global_position
 	else:
 		player.global_position = spawn_default.global_position
+
+	print("Player spawn after set: ", player.global_position)
+	print("Room global position: ", global_position)
+	print("Spawn default global: ", spawn_default.global_position)
 
 func refresh() -> void:
 	update_room_state()

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6a0setdil0am"]
 
 [ext_resource type="Script" uid="uid://ckttbwf6ok0tm" path="res://scripts/rooms/room-runtime.gd" id="1_l82oc"]
+[ext_resource type="Texture2D" uid="uid://bnexxu20nmicx" path="res://assets/images/Testing/checkerboard 16x9.jpg" id="2_kqwh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l82oc"]
 size = Vector2(218, 4.5)
@@ -17,10 +18,10 @@ size = Vector2(3.5, 179)
 [node name="RoomRuntime" type="Node2D" unique_id=1001241366]
 script = ExtResource("1_l82oc")
 
-[node name="Floor" type="ColorRect" parent="." unique_id=1360805306]
+[node name="Floor" type="TextureRect" parent="." unique_id=34178181]
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.7254902, 0.34117648, 0.21960784, 0.5647059)
+texture = ExtResource("2_kqwh4")
 
 [node name="Walls" type="Node" parent="." unique_id=2019138338]
 
@@ -28,7 +29,7 @@ color = Color(0.7254902, 0.34117648, 0.21960784, 0.5647059)
 position = Vector2(640, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorUp" unique_id=499763914]
-position = Vector2(0, -40)
+position = Vector2(0, -13)
 shape = SubResource("RectangleShape2D_l82oc")
 
 [node name="Marker2D" type="Marker2D" parent="DoorUp" unique_id=1238127917]
@@ -37,7 +38,7 @@ shape = SubResource("RectangleShape2D_l82oc")
 position = Vector2(640, 720)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorDown" unique_id=895264294]
-position = Vector2(0, 40)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_kqwh4")
 
 [node name="Marker2D" type="Marker2D" parent="DoorDown" unique_id=1224376886]
@@ -61,19 +62,19 @@ shape = SubResource("RectangleShape2D_idn60")
 [node name="Marker2D" type="Marker2D" parent="DoorRight" unique_id=550356734]
 
 [node name="SpawnDefault" type="Marker2D" parent="." unique_id=960929992]
-position = Vector2(320, 180)
+position = Vector2(640, 360)
 
 [node name="SpawnFromUp" type="Marker2D" parent="." unique_id=841196765]
-position = Vector2(640, 10)
+position = Vector2(640, 40)
 
 [node name="SpawnFromDown" type="Marker2D" parent="." unique_id=565147522]
-position = Vector2(640, 710)
+position = Vector2(640, 690)
 
 [node name="SpawnFromLeft" type="Marker2D" parent="." unique_id=1750164407]
-position = Vector2(10, 360)
+position = Vector2(15, 360)
 
 [node name="SpawnFromRight" type="Marker2D" parent="." unique_id=1892919819]
-position = Vector2(1270, 360)
+position = Vector2(1265, 360)
 
 [node name="DebugLabel" type="Label" parent="." unique_id=616318912]
 offset_left = 199.0

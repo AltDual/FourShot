@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bjf63rh441p05"]
+
+[ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://cevalwnj1xwct" path="res://scripts/scene-scripts/game-scene.gd" id="1_yqjtg"]
+
+[node name="Game" type="Control" unique_id=1305911699]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yqjtg")
+
+[node name="Background" type="ColorRect" parent="." unique_id=213222082]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.0941176, 0.121569, 0.176471, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Background" unique_id=2053697865]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 100.0
+offset_right = 592.5
+offset_bottom = 159.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/CenterContainer" unique_id=1601549200]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/CenterContainer/MarginContainer" unique_id=1217334669]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/CenterContainer/MarginContainer/VBoxContainer" unique_id=394019246]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uwrxv")
+theme_override_font_sizes/font_size = 24
+text = "PLACEHOLDER, MAYBE CHARACTER SELECT"
+
+[node name="DungeonButton" type="Button" parent="Background/CenterContainer/MarginContainer/VBoxContainer" unique_id=553282566]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uwrxv")
+text = "Go To Dungeon"
+
+[node name="DebugButton" type="Button" parent="Background/CenterContainer/MarginContainer/VBoxContainer" unique_id=229085588]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uwrxv")
+text = "Debug Dungeon Map"
+
+[node name="CenterContainer2" type="CenterContainer" parent="Background" unique_id=1447190837]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 20.0
+offset_right = 620.0
+offset_bottom = 51.0
+
+[node name="BackButton" type="Button" parent="Background/CenterContainer2" unique_id=502591284]
+layout_mode = 2
+text = "BACK"
+
+[connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DungeonButton" to="." method="_on_dungeon_pressed"]
+[connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DebugButton" to="." method="_on_debug_button_pressed"]
+[connection signal="pressed" from="Background/CenterContainer2/BackButton" to="." method="_on_back_button_pressed"]
