@@ -1,6 +1,6 @@
 extends Node
 
-const ROOM_RUNTIME_SCENE := preload("res://scenes/room-runtime.tscn")
+const ROOM_RUNTIME_SCENE := preload("res://scenes/room_tile_test.tscn")
 const ROOM_TRANSITION_COOLDOWN := 0.35
 
 const RANGED_ENEMY = preload("res://scenes/ranged_enemy.tscn")

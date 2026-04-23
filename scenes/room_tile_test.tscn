@@ -1,7 +1,9 @@
-[gd_scene format=4 uid="uid://fnps4jd2qgiv"]
+[gd_scene format=4 uid="uid://1cl76x3apodf"]
 
 [ext_resource type="Texture2D" uid="uid://c5w73hp3t6qcy" path="res://assets/images/Tileset/atlas_floor-16x16.png" id="1_5cesa"]
+[ext_resource type="Script" uid="uid://ckttbwf6ok0tm" path="res://scripts/rooms/room-runtime.gd" id="1_srmk2"]
 [ext_resource type="Texture2D" uid="uid://dmwbtg14fbw8d" path="res://assets/images/Tileset/atlas_walls_low-16x16.png" id="2_d0uwt"]
+[ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="4_1k5iw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d0uwt"]
 texture = ExtResource("1_5cesa")
@@ -126,6 +128,7 @@ a = Vector2(0, -64)
 b = Vector2(0, 64)
 
 [node name="Floor" type="Node2D" unique_id=2049295722]
+script = ExtResource("1_srmk2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=338338704]
 visible = false
@@ -198,3 +201,10 @@ position = Vector2(25, 368)
 
 [node name="SpawnFromRight" type="Marker2D" parent="." unique_id=1768691945]
 position = Vector2(1255, 368)
+
+[node name="DebugLabel" type="Label" parent="." unique_id=1342903727]
+offset_left = 199.0
+offset_top = 40.0
+offset_right = 239.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("4_1k5iw")
