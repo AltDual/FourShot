@@ -1,9 +1,9 @@
 extends Node2D
 
+signal weapon_switched(weapon: WeaponResource)
 @export var weapon_data: WeaponResource
 
 const BULLET = preload("res://scenes/bullet.tscn")
-@export var offset := 10.0
 @onready var muzzle: Marker2D = $Marker2D
 
 var can_fire: bool = true
@@ -23,7 +23,10 @@ func _process(_delta: float) -> void:
 	if fire_input and can_fire:
 		fire()
 	
-
+func _load_weapon(data: WeaponResource) -> void:
+	weapon_data = data
+	can_fire = true
+	weapon_switched.emit(weapon_data)
 
 func fire() -> void:
 	can_fire = false
@@ -68,4 +71,7 @@ func spawn_bullet(angle: float) -> void:
 	bullet.rotation = angle
 
 	# Optional if you implement it
-	# bullet.setup(weapon_data.damage, weapon_data.bullet_speed, weapon_data.bullet_range)
+	bullet.setup(weapon_data.damage, weapon_data.bullet_speed, weapon_data.bullet_range)
+
+func equip(data: WeaponResource) -> void:
+	_load_weapon(data)

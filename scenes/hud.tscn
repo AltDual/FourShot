@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cb6dow6faptvk" path="res://assets/images/Weapons/hotbar/ak67.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://ddx2uwg1ela48" path="res://scenes/HUDSignalListener.gd" id="1_oo0fn"]
+[ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_5ysmq"]
 
 [sub_resource type="Gradient" id="Gradient_sugp2"]
 colors = PackedColorArray(0.30692267, 0.3069227, 0.3069227, 1, 0.15127608, 0.15127608, 0.15127608, 1)
@@ -66,6 +67,7 @@ alignment = 2
 [node name="AmmoText" type="Label" parent="MarginContainer/BottomRight" unique_id=2129674209]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_5ysmq")
 text = "x/x"
 
 [node name="Hotbar" type="VBoxContainer" parent="MarginContainer/BottomRight" unique_id=501312799]
@@ -90,6 +92,7 @@ stretch_mode = 2
 
 [node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot1/VBoxContainer" unique_id=191306634]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5ysmq")
 text = "AK 67"
 
 [node name="Slot2" type="PanelContainer" parent="MarginContainer/BottomRight/Hotbar" unique_id=982606748]
@@ -109,4 +112,5 @@ texture = ExtResource("1_ahhtf")
 
 [node name="WeaponName" type="Label" parent="MarginContainer/BottomRight/Hotbar/Slot2/VBoxContainer" unique_id=1843637481]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5ysmq")
 text = "Fireball spell"

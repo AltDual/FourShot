@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cm2hbs0ugh64x" path="res://assets/images/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgfmrummuxwsx" path="res://scripts/Player/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://tbfwl67iermv" path="res://scenes/gun.tscn" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://dpn5181crkhhd" path="res://scripts/Player/camera.gd" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -422,24 +421,23 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(10.75, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 1.75
+height = 8.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1252588381]
 scale = Vector2(4, 4)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1717828801]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ha2mi")
 animation = &"run_right"
 frame_progress = 0.39947474
 
 [node name="Gun" parent="." unique_id=1679620526 instance=ExtResource("3_qhqgy")]
-position = Vector2(9, 0)
+position = Vector2(3.25, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185981517]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_qhqgy")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1736693932]
-script = ExtResource("4_dqkch")
+position = Vector2(0.25, -1.5)
+shape = SubResource("CapsuleShape2D_qhqgy")

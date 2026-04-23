@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 	
 	if global_position.distance_to(start_position) > max_distance:
 		queue_free()
+
 #TODO: fix collision masks/hitboxes
 func on_hit(target) -> void:
 	if target.has_method("take_damage"):
