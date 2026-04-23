@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cdxlcta4kueie"]
+
+[ext_resource type="Script" uid="uid://bxa1bse58wu8n" path="res://scripts/rooms/debug-dungeon-map.gd" id="1_41nlv"]
+[ext_resource type="Script" uid="uid://qd2wody7fdtr" path="res://scripts/rooms/room-generator.gd" id="2_jn3fw"]
+
+[node name="Node2D" type="Node2D" unique_id=531078927]
+script = ExtResource("1_41nlv")
+
+[node name="DungeonGenerator" type="Node" parent="." unique_id=1100698548]
+script = ExtResource("2_jn3fw")

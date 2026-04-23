@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bv3rl4xttiyii"]
+[gd_scene format=3 uid="uid://r8qvl0bkm2fw"]
 
 [ext_resource type="Texture2D" uid="uid://cm2hbs0ugh64x" path="res://assets/images/Player/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgfmrummuxwsx" path="res://scripts/Player/player.gd" id="1_g2els"]
@@ -421,6 +421,9 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(10.75, 20)
+
 [node name="Player" type="CharacterBody2D" unique_id=1252588381]
 scale = Vector2(4, 4)
 script = ExtResource("1_g2els")
@@ -432,3 +435,7 @@ frame_progress = 0.39947474
 
 [node name="Gun" parent="." unique_id=1679620526 instance=ExtResource("3_qhqgy")]
 position = Vector2(9, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185981517]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_qhqgy")

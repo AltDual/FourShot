@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dltdaiv0tmn38"]
+[gd_scene format=3 uid="uid://bjf63rh441p05"]
 
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://cevalwnj1xwct" path="res://scripts/scene-scripts/game-scene.gd" id="1_yqjtg"]
