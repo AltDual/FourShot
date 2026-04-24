@@ -126,7 +126,7 @@ region = Rect2(48, 32, 16, 16)
 atlas = ExtResource("5_rw177")
 region = Rect2(0, 48, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rkymw"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggosf"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -235,9 +235,16 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wg68"]
+resource_local_to_scene = true
+radius = 8.0
+
 [node name="MiniGolem" unique_id=688229520 instance=ExtResource("1_dol1d")]
 script = ExtResource("2_5b1lh")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=2058940189]
-sprite_frames = SubResource("SpriteFrames_rkymw")
-frame_progress = 0.6043196
+sprite_frames = SubResource("SpriteFrames_ggosf")
+frame_progress = 0.48713323
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=829269521]
+shape = SubResource("CircleShape2D_8wg68")

@@ -6,12 +6,12 @@ const SNIPER_PICKUP = preload("res://scenes/sniper_pickup.tscn")
 
 var hits_remaining: int = 4
 var mini_golems_killed: int = 0
-var mini_golems_needed: int = 1
+var mini_golems_needed: int = 5
 var mini_boss_alive: bool = false
 var is_immune: bool = true
 var player_has_sniper: bool = false  # boss reacts to this
 var summon_timer: float = 0.0
-var summon_interval: float = 4.0
+var summon_interval: float = 8.0
 
 # Evasion speeds
 const NORMAL_SPEED: float = 60.0
@@ -59,11 +59,11 @@ func hit_with_sniper() -> void:
 		_die()
 	else:
 		# Summon more aggressively each phase
-		summon_interval = max(1.5, 4.0 - ((4 - hits_remaining) * 0.7))
+		summon_interval = max(4.0, 4.0 - ((4 - hits_remaining) * 0.7))
 
 # ---------------------------------------------------------------------------
 # Summoning
-# ---------------------------------------------------------------------------
+# ---------------------------------------------------------a------------------
 func _summon_mini_golems() -> void:
 	var bounds = Rect2(80, 80, 1100, 560)
 	var count = 2 + (4 - hits_remaining)  # more per phase

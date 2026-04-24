@@ -1,11 +1,9 @@
 extends RangedEnemy
 
-var boss = null
-
 func on_ready() -> void:
-	max_health = 200
-	damage = 15
-	move_speed = 55.0
-	fire_rate = 1.0
-	preferred_range = 180.0
+	max_health = 25
+	damage = 8
+	move_speed = 90.0
+	fire_rate = 2.0
+	preferred_range = 150.0
 	xp_gain = 0
