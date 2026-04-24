@@ -30,3 +30,7 @@ Due to the scalability of the weapon and enemy systems, it is easy to add more c
 - Download the latest version of Godot https://godotengine.org/
 - Clone this repository and open the file in Godot
 - Or download one of the builds from Releases
+## How to Play
+- To view the controls they can be viewed from the main menu
+- Clear all the rooms (or not) and fight the boss to win!
+- Tip: Dash is very useful as it give i-frames
