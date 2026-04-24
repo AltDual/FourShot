@@ -46,10 +46,22 @@ const FLOOR_ATLAS_COORDS_RIGHT = Vector2i(0,0)
 #const FLOOR_ATLAS_COORDS_MAIN = Vector2i(4, 0)
 
 # The floor thresholds/doormats for the 4 doorways
-const FLOOR_UP_CELLS: Array[Vector2i] = [Vector2i(36, 0), Vector2i(44,0)] 
-const FLOOR_DOWN_CELLS: Array[Vector2i] = [Vector2i(36, 44), Vector2i(44,44)]
-const FLOOR_LEFT_CELLS: Array[Vector2i] = [Vector2i(-1, 18), Vector2i(0, 27)]
-const FLOOR_RIGHT_CELLS: Array[Vector2i] = [Vector2i(79, 18), Vector2i(80, 27)]
+const FLOOR_UP_CELLS: Array[Vector2i] = [Vector2i(36, 0), Vector2i(43,0)] 
+const FLOOR_DOWN_CELLS: Array[Vector2i] = [Vector2i(36, 44), Vector2i(43,44)]
+const FLOOR_LEFT_CELLS: Array[Vector2i] = [Vector2i(-1, 19), Vector2i(0, 27)]
+const FLOOR_RIGHT_CELLS: Array[Vector2i] = [Vector2i(79, 19), Vector2i(80, 27)]
+# ----------------------------------
+
+# --- BOSS DOOR CONFIGURATION ---
+# Replace these with the actual atlas coordinates of your two boss indicator tiles
+const BOSS_TILE_1 = Vector2i(3, 0) 
+const BOSS_TILE_2 = Vector2i(4, 0)
+
+# Exact 2 coordinates for the boss indicators (DOES NOT fill between them)
+const BOSS_INDICATOR_UP: Array[Vector2i] = [Vector2i(35, 0), Vector2i(44, 0)]
+const BOSS_INDICATOR_DOWN: Array[Vector2i] = [Vector2i(35, 44), Vector2i(44, 44)]
+const BOSS_INDICATOR_LEFT: Array[Vector2i] = [Vector2i(0, 18), Vector2i(0, 27)]
+const BOSS_INDICATOR_RIGHT: Array[Vector2i] = [Vector2i(79, 18), Vector2i(79, 27)]
 # ----------------------------------
 
 var room_data: RoomData
@@ -102,9 +114,7 @@ func fill_area_from_array(tilemap: TileMapLayer, cells: Array[Vector2i], source_
 func update_room_tiles() -> void:
 	if room_data == null: return
 
-	# ONLY overwrite the tilemap if the door DOES NOT exist (acting as a plug).
-	# If the door DOES exist, it skips this and leaves your original editor art intact!
-	
+	# 1. Update the Plugs (Walls and Floors)
 	if not room_data.door_up: 
 		fill_area_from_array(wall_tilemap, DOOR_UP_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_TOP)
 		fill_area_from_array(floor_tilemap, FLOOR_UP_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_TOP)
@@ -120,6 +130,24 @@ func update_room_tiles() -> void:
 	if not room_data.door_right: 
 		fill_area_from_array(wall_tilemap, DOOR_RIGHT_CELLS, WALL_SOURCE_ID, WALL_ATLAS_COORDS_RIGHT)
 		fill_area_from_array(floor_tilemap, FLOOR_RIGHT_CELLS, FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS_RIGHT)
+
+	# 2. Draw Boss Door Indicators (Only if the door exists AND leads to the boss)
+	if dungeon != null:
+		if room_data.door_up and dungeon.door_leads_to_boss(room_grid_pos, Vector2i.UP):
+			floor_tilemap.set_cell(BOSS_INDICATOR_UP[0], FLOOR_SOURCE_ID, BOSS_TILE_1)
+			floor_tilemap.set_cell(BOSS_INDICATOR_UP[1], FLOOR_SOURCE_ID, BOSS_TILE_2)
+			
+		if room_data.door_down and dungeon.door_leads_to_boss(room_grid_pos, Vector2i.DOWN):
+			floor_tilemap.set_cell(BOSS_INDICATOR_DOWN[0], FLOOR_SOURCE_ID, BOSS_TILE_1)
+			floor_tilemap.set_cell(BOSS_INDICATOR_DOWN[1], FLOOR_SOURCE_ID, BOSS_TILE_2)
+			
+		if room_data.door_left and dungeon.door_leads_to_boss(room_grid_pos, Vector2i.LEFT):
+			floor_tilemap.set_cell(BOSS_INDICATOR_LEFT[0], FLOOR_SOURCE_ID, BOSS_TILE_2) # Left only uses 2
+			floor_tilemap.set_cell(BOSS_INDICATOR_LEFT[1], FLOOR_SOURCE_ID, BOSS_TILE_2)
+			
+		if room_data.door_right and dungeon.door_leads_to_boss(room_grid_pos, Vector2i.RIGHT):
+			floor_tilemap.set_cell(BOSS_INDICATOR_RIGHT[0], FLOOR_SOURCE_ID, BOSS_TILE_1) # Right only uses 1
+			floor_tilemap.set_cell(BOSS_INDICATOR_RIGHT[1], FLOOR_SOURCE_ID, BOSS_TILE_1)
 
 func update_room_state() -> void:
 	if room_data == null:
@@ -142,7 +170,6 @@ func update_room_state() -> void:
 		str(room_data.cleared)
 	]
 
-	# Draw plugs if necessary
 	update_room_tiles()
 
 func disable_doors_temporarily() -> void:
