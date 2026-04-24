@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://os6acr2hf35d"]
+
+[ext_resource type="PackedScene" uid="uid://dkxndoobbicx5" path="res://scenes/ranged_enemy.tscn" id="1_8ywrb"]
+[ext_resource type="Script" uid="uid://8vpbvacnmdpo" path="res://scripts/Enemies/small_slime_enemy.gd" id="2_oq1ga"]
+
+[node name="Small_Slime_Enemy" unique_id=688229520 instance=ExtResource("1_8ywrb")]
+script = ExtResource("2_oq1ga")

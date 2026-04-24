@@ -1,3 +1,4 @@
+class_name RangedEnemy
 extends CharacterBody2D
 
 
@@ -17,7 +18,8 @@ extends CharacterBody2D
 # ---------------------------------------------------------------------------
 # Scene refs  (update paths if your nodes are named differently)
 # ---------------------------------------------------------------------------
-const ENEMY_BULLET = preload("res://scenes/enemy_bullet.tscn")
+func get_bullet_scene() -> PackedScene:
+	return load("res://scenes/enemy_bullet.tscn")
  
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var muzzle: Marker2D = $Muzzle
@@ -42,6 +44,9 @@ func _ready() -> void:
 	current_health = max_health
 	detection_area.body_entered.connect(_on_body_entered_detection)
 	detection_area.body_exited.connect(_on_body_exited_detection)
+
+func on_ready() -> void:
+	pass
  
 # ---------------------------------------------------------------------------
 # Main loop
@@ -107,17 +112,18 @@ func _face_player() -> void:
 # ---------------------------------------------------------------------------
 func _shoot() -> void:
 	can_fire = false
-	_spawn_bullet()
+	_on_shoot()
 	await get_tree().create_timer(fire_rate).timeout
 	can_fire = true
  
-func _spawn_bullet() -> void:
-	var bullet = ENEMY_BULLET.instantiate()
+func _on_shoot() -> void:
+	_spawn_bullet((player.global_position - muzzle.global_position).normalized().angle())
+	
+func _spawn_bullet(angle: float) -> void:
+	var bullet = get_bullet_scene().instantiate()
 	get_tree().root.add_child(bullet)
-	bullet.global_position = muzzle.global_position
- 
-	var dir = (player.global_position - muzzle.global_position).normalized()
-	bullet.rotation = dir.angle()
+	bullet.position = muzzle.global_position
+	bullet.rotation = angle
 	bullet.setup(damage, bullet_speed, bullet_range)
  
 # ---------------------------------------------------------------------------
@@ -125,16 +131,24 @@ func _spawn_bullet() -> void:
 # ---------------------------------------------------------------------------
 func take_damage(amount: int) -> void:
 	current_health -= amount
-	# Flash or play hurt animation here
+	on_hit()
 	if current_health <= 0:
 		_die()
  
+
+func on_hit() -> void:
+	pass  # override for hit flash, sound, etc
+
 func _die() -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.gain_xp(xp_gain)
+	on_death()
 	queue_free()
  
+func on_death() -> void:
+	pass  # override for death animation, drops, etc.
+
 # ---------------------------------------------------------------------------
 # Detection area callbacks
 # ---------------------------------------------------------------------------

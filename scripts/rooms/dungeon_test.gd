@@ -3,7 +3,7 @@ extends Node
 const ROOM_RUNTIME_SCENE := preload("res://scenes/room-main.tscn")
 const ROOM_TRANSITION_COOLDOWN := 0.35
 
-const RANGED_ENEMY = preload("res://scenes/ranged_enemy.tscn")
+const SMALL_SLIME_ENEMY = preload("res://scenes/small_slime_enemy.tscn")
 
 @onready var dungeon = $DungeonGenerator
 @onready var room_view: Node2D = $RoomView
@@ -117,7 +117,7 @@ func handle_room_enter(room: RoomData) -> void:
 func enter_combat_room(room: RoomData) -> void:
 	if not room.enemies_spawned:
 		room.enemies_spawned = true
-		spawn_enemies(room, 100)    # however many you want
+		spawn_enemies(room, 3)    # however many you want
 	room.doors_locked = true
 	map_overlay.visible = false
 	refresh_current_room()
@@ -148,13 +148,17 @@ func refresh_current_room() -> void:
 		current_room_instance.refresh()
 
 #TESTING CODE FOR ENEMIES
+var enemies_alive: int = 0
+
 func spawn_enemies(room: RoomData, count: int) -> void:
 	var room_size = get_room_bounds() 
 	
 	for i in range(count):
-		var enemy = RANGED_ENEMY.instantiate()
+		var enemy = SMALL_SLIME_ENEMY.instantiate()
 		current_room_instance.add_child(enemy)
 		enemy.global_position = _random_spawn_position(room_size)
+		enemy.tree_exited.connect(_on_enemy_died)
+		enemies_alive += 1
 
 func _random_spawn_position(bounds: Rect2) -> Vector2:
 	const MIN_DIST_FROM_PLAYER = 150.0
@@ -174,5 +178,9 @@ func _random_spawn_position(bounds: Rect2) -> Vector2:
 	# Fallback if no valid position found after 20 tries
 	return bounds.get_center()
 
+func _on_enemy_died() -> void:
+	enemies_alive -= 1
+	if enemies_alive <= 0:
+		clear_current_room()
 func get_room_bounds() -> Rect2:
 	return Rect2(0, 0, 1280, 720)
