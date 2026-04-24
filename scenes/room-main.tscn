@@ -219,6 +219,7 @@ position = Vector2(25, 368)
 position = Vector2(1255, 368)
 
 [node name="DebugLabel" type="Label" parent="." unique_id=1342903727]
+visible = false
 offset_left = 199.0
 offset_top = 40.0
 offset_right = 239.0
