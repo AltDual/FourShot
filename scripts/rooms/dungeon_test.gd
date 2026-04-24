@@ -11,6 +11,7 @@ const ELITE_SLIME_ENEMY = preload("res://scenes/elite_slime_enemy.tscn")
 @onready var dungeon = $DungeonGenerator
 @onready var room_view: Node2D = $RoomView
 @onready var map_overlay = $MapCanvasLayer/MapOverlay
+@onready var minimap = $MapCanvasLayer/Minimap
 @onready var player: CharacterBody2D = $Player
 @onready var boss_music: AudioStreamPlayer2D = $BossMusic
 #@onready var game_camera = $GameCamera
@@ -23,6 +24,7 @@ var can_transition_rooms: bool = true
 func _ready() -> void:
 	#game_camera.set_target(player)
 	map_overlay.set_references(dungeon, player)
+	minimap.setup(player)
 	load_current_room()
 
 func _process(_delta: float) -> void:
@@ -32,14 +34,13 @@ func _process(_delta: float) -> void:
 		if not current_room.doors_locked:
 			map_overlay.visible = not map_overlay.visible
 			map_overlay.refresh()
+			# NEW: Set minimap visibility to the opposite of the big map
+			minimap.visible = not map_overlay.visible
 
+	# Auto-close the big map and restore the minimap if combat starts
 	if current_room.doors_locked and map_overlay.visible:
 		map_overlay.visible = false
-
-	#if Input.is_action_just_pressed("ui_accept"):
-	#	if current_room.doors_locked and not current_room.cleared:
-	#		clear_current_room()
-	#		return
+		minimap.visible = true
 
 func load_current_room() -> void:
 	if current_room_instance:
@@ -54,6 +55,9 @@ func load_current_room() -> void:
 
 	current_room_instance = ROOM_RUNTIME_SCENE.instantiate()
 	room_view.add_child(current_room_instance)
+
+	# NEW: Tell the minimap where the camera/room just moved to!
+	minimap.set_current_room(current_room_instance.global_position)
 
 	current_room_instance.setup(
 		room,

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bwt62412w7wou" path="res://scripts/rooms/map-overlay.gd" id="3_4evpv"]
 [ext_resource type="PackedScene" uid="uid://r8qvl0bkm2fw" path="res://scenes/player.tscn" id="4_8lwq6"]
 [ext_resource type="PackedScene" uid="uid://cnacq424ym4ph" path="res://scenes/hud.tscn" id="5_63mvo"]
+[ext_resource type="Script" uid="uid://diojdaifcn3ev" path="res://scripts/rooms/minimap.gd" id="6_8lwq6"]
 
 [sub_resource type="Environment" id="Environment_63mvo"]
 glow_enabled = true
@@ -36,6 +37,15 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_4evpv")
+
+[node name="Minimap" type="Control" parent="MapCanvasLayer" unique_id=1148058006]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 80.0
+script = ExtResource("6_8lwq6")
 
 [node name="BossMusic" type="AudioStreamPlayer2D" parent="." unique_id=1405909221]
 

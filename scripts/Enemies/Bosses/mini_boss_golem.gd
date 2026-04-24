@@ -9,3 +9,4 @@ func on_ready() -> void:
 	fire_rate = 1.5
 	preferred_range = 180.0
 	xp_gain = 0
+	add_to_group("enemies")
