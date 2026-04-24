@@ -9,7 +9,7 @@ base_font = ExtResource("2_5ysmq")
 spacing_glyph = 1
 
 [sub_resource type="Gradient" id="Gradient_sugp2"]
-colors = PackedColorArray(0.30692267, 0.3069227, 0.3069227, 1, 0.15127608, 0.15127608, 0.15127608, 1)
+colors = PackedColorArray(0.16924527, 0.1692453, 0.16924527, 1, 0.15127608, 0.15127608, 0.15127608, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jyhfs"]
 gradient = SubResource("Gradient_sugp2")
@@ -53,10 +53,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/TopLeft/HPContainer" unique_id=1867573154]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_5ysmq")
 theme_override_font_sizes/font_size = 8
 text = "HP"
+vertical_alignment = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/TopLeft/HPContainer" unique_id=208116315]
 custom_minimum_size = Vector2(150, 4)
@@ -72,10 +74,13 @@ texture_progress = SubResource("GradientTexture1D_tefeu")
 layout_mode = 2
 
 [node name="LevelLabel" type="Label" parent="MarginContainer/TopLeft/XPContainer" unique_id=1945683993]
+clip_contents = true
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_5ysmq")
 theme_override_font_sizes/font_size = 8
 text = "LVL 1"
+vertical_alignment = 1
 
 [node name="XPBar" type="TextureProgressBar" parent="MarginContainer/TopLeft/XPContainer" unique_id=899470959]
 custom_minimum_size = Vector2(150, 4)

@@ -5,15 +5,16 @@ const SPEED = 150.0
 #var last_direction: Vector2 = Vector2.RIGHT
 #var movement_locked: bool = false
 #var require_input_release: bool = false
-const HEALTH_UPGRADE = preload("uid://dgm8xdalnvvby")
-const DAMAGE_UPGRADE = preload("uid://hs6vyxu4bfep")
-const SPEED_UPGRADE = preload("uid://bvy68wqchh5ye")
+const HEALTH_UPGRADE = preload("res://resources/HealthUpgrade.tres")
+const DAMAGE_UPGRADE = preload("res://resources/DamageUpgrade.tres")
+const SPEED_UPGRADE = preload("res://resources/SpeedUpgrade.tres")
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var gun = $Gun
 @onready var reload_bar: ProgressBar = $ReloadBar
 var reload_tween: Tween
+var damage_tween: Tween
 
 var max_health: int = 100
 var current_health: int = 100
@@ -115,6 +116,9 @@ func take_damage(amount: int):
 		return
 	current_health = max(0, current_health - amount)
 	SignalBus.health_changed.emit(current_health, max_health)
+	
+	flash_damage()
+	
 	if current_health == 0:
 		_die()
 
@@ -237,3 +241,18 @@ func _on_sniper_fired() -> void:
 	# Re-equip previous weapon
 	equip_weapon(active_weapon_index)
 	SignalBus.special_weapon_used.emit()
+func flash_damage() -> void:
+	# Kill the previous tween if the player is hit rapidly
+	if damage_tween:
+		damage_tween.kill()
+		
+	# Ensure the sprite starts at its default color (white)
+	animated_sprite_2d.modulate = Color(1, 1, 1, 1) 
+	
+	damage_tween = create_tween()
+	
+	# Step 1: Instantly turn the sprite red (or change 0.05 to make it fade to red)
+	damage_tween.tween_property(animated_sprite_2d, "modulate", Color(1, 0, 0, 1), 0.05)
+	
+	# Step 2: Fade it back to normal over 0.15 seconds
+	damage_tween.tween_property(animated_sprite_2d, "modulate", Color(1, 1, 1, 1), 0.15)
