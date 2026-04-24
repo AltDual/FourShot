@@ -433,9 +433,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0.33333334)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjrip"]
 bg_color = Color(1, 1, 1, 0.5764706)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
-radius = 1.75
-height = 9.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7pv"]
+size = Vector2(8, 8)
 
 [node name="Player" type="CharacterBody2D" unique_id=1252588381]
 process_mode = 3
@@ -465,12 +464,11 @@ theme_override_styles/background = SubResource("StyleBoxFlat_smehm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fjrip")
 show_percentage = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=824598718]
-position = Vector2(0.25, 1.25)
-scale = Vector2(1, 0.5)
-shape = SubResource("CapsuleShape2D_dqkch")
-
 [node name="UpgradeMenu" parent="." unique_id=172340655 instance=ExtResource("8_smehm")]
 
 [node name="PauseMenu" parent="." unique_id=847492869 instance=ExtResource("9_ur7pv")]
 process_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=189126837]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_ur7pv")
