@@ -239,7 +239,7 @@ animations = [{
 resource_local_to_scene = true
 radius = 40.112343
 
-[node name="NotSoSneakyGolem" unique_id=688229520 instance=ExtResource("1_2ldtf")]
+[node name="NotSoSneakyGolem" unique_id=688229520 groups=["boss"] instance=ExtResource("1_2ldtf")]
 script = ExtResource("2_h335e")
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=2058940189]
