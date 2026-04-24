@@ -248,3 +248,13 @@ sprite_frames = SubResource("SpriteFrames_po1bb")
 
 [node name="CollisionShape2D" parent="." index="3" unique_id=829269521]
 shape = SubResource("CircleShape2D_mhhve")
+
+[node name="Health" type="ProgressBar" parent="." index="5" unique_id=1816284270]
+offset_left = -41.0
+offset_top = 45.0
+offset_right = 40.0
+offset_bottom = 50.0
+max_value = 4.0
+step = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true

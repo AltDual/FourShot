@@ -228,4 +228,4 @@ func _show_victory() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.queue_free()
 	get_tree().paused = true
-	get_tree().change_scene_to_file("res://scenes/victory.tscn")
+	get_tree().change_scene_to_file("res://scenes/victory_scene.tscn")

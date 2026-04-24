@@ -3,6 +3,7 @@ extends RangedEnemy
 const MINI_GOLEM = preload("res://scenes/mini_golem.tscn")
 const MINI_BOSS_GOLEM = preload("res://scenes/mini_boss_golem.tscn")
 const SNIPER_PICKUP = preload("res://scenes/sniper_pickup.tscn")
+@onready var health: ProgressBar = $Health
 
 var hits_remaining: int = 4
 var mini_golems_killed: int = 0
@@ -23,6 +24,8 @@ func on_ready() -> void:
 	preferred_range = 300.0
 	detection_range = 9999
 	xp_gain = 500
+	health.max_value = 4
+	health.value = 4
 	_start_teleport_loop()
 
 # ---------------------------------------------------------------------------
@@ -55,6 +58,7 @@ func hit_with_sniper() -> void:
 	move_speed = NORMAL_SPEED
 	_flash_hit()
 	SignalBus.boss_progress.emit(hits_remaining, 4)
+	health.value = hits_remaining
 	if hits_remaining <= 0:
 		_die()
 	else:
@@ -104,7 +108,7 @@ func _spawn_sniper_pickup() -> void:
 # ---------------------------------------------------------------------------
 func _start_teleport_loop() -> void:
 	while not is_dead:
-		var delay = 1.0 if player_has_sniper else 3.5
+		var delay = 2.0 if player_has_sniper else 3.5
 		await get_tree().create_timer(delay).timeout
 		if not is_dead:
 			_teleport()

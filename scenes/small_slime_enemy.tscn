@@ -95,7 +95,6 @@ radius = 8.0
 [node name="Small_Slime_Enemy" unique_id=688229520 instance=ExtResource("1_8ywrb")]
 script = ExtResource("2_oq1ga")
 damage = 4
-bullet_speed = 400.0
 
 [node name="AnimatedSprite2D" parent="." index="0" unique_id=2058940189]
 sprite_frames = SubResource("SpriteFrames_ytdci")

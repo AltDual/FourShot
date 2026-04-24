@@ -51,7 +51,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sa3yf")
 theme_override_font_sizes/font_size = 32
-text = "TITLE NAME HERE"
+text = "FourShot"
 horizontal_alignment = 1
 
 [node name="SubtitleLabel" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=2093256374]

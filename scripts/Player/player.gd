@@ -16,8 +16,8 @@ const SPEED_UPGRADE = preload("res://resources/SpeedUpgrade.tres")
 var reload_tween: Tween
 var damage_tween: Tween
 
-var max_health: int = 100
-var current_health: int = 100
+var max_health: int = 200
+var current_health: int = 200
 var current_xp: int = 0
 var current_level: int = 1
 var xp_thresholds: Array[int] = [100, 250, 500, 900, 1400, 2000]

@@ -40,9 +40,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_i2gav")
 text = "     WASD - Movement
-     E - Pickup Weapon
+     Space - Dash
      R - Reload
-     F - Switch Weapon"
+     1,2 - Switch Weapon
+     Tab - Toggle Map
+	"
 
 [node name="CenterContainer2" type="CenterContainer" parent="ColorRect" unique_id=317088371]
 layout_mode = 0

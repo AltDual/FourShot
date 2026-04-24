@@ -2,7 +2,7 @@ extends RangedEnemy
 
 func on_ready() -> void:
 	max_health = 300
-	damage = 4
+	damage = 10
 	fire_rate = 0.8
 	preferred_range = 150.0
 	add_to_group("enemies")
