@@ -5,6 +5,7 @@ func on_ready() -> void:
 	damage = 15
 	fire_rate = 0.8
 	preferred_range = 150.0
+	add_to_group("enemies")
 
 
 func _on_shoot() -> void:

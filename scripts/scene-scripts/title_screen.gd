@@ -1,6 +1,6 @@
 extends Control
 
-const LOBBY_SCENE := "res://scenes/lobby.tscn"
+const LOBBY_SCENE := "res://scenes/dungeon-test.tscn"
 const CONTROLS_SCENE := "res://scenes/controls.tscn"
 
 @onready var start_button: Button = $CenterContainer/MarginContainer/VBoxContainer/StartButton
