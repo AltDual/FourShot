@@ -3,6 +3,8 @@ extends Node2D
 signal weapon_switched(weapon: WeaponResource)
 signal reload_started(duration: float)
 signal reload_finished()
+signal special_shot_fired
+
 
 @export var weapon_data: WeaponResource
 const BULLET = preload("res://scenes/bullet.tscn")
@@ -109,6 +111,9 @@ func fire() -> void:
 			fire_spread()
 		"circle":
 			fire_circle()
+			
+	if weapon_data.is_special:
+		special_shot_fired.emit()
 
 func fire_single() -> void:
 	spawn_bullet(rotation)

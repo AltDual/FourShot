@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bhvke8fy0gbo1"]
+
+[ext_resource type="Script" uid="uid://c3td8umnxtrvl" path="res://scripts/Enemies/Bosses/sniper_pickup.gd" id="1_rykwd"]
+[ext_resource type="Texture2D" uid="uid://cb2ucunhrvmg5" path="res://assets/images/Weapons/specialsniper/46.png" id="2_xamvl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ldi0"]
+radius = 17.117243
+
+[node name="SniperPickup" type="Area2D" unique_id=1730945936]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rykwd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1559095464]
+texture = ExtResource("2_xamvl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1833413060]
+shape = SubResource("CircleShape2D_8ldi0")

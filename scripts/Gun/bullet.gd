@@ -14,6 +14,8 @@ func setup(p_damage: int, p_speed: float, p_range: float) -> void:
 	max_distance = p_range
 	start_position = global_position
 	body_entered.connect(_on_body_entered)
+	print("Bullet spawned, mask: ", collision_mask)
+
 
 func _process(delta: float) -> void:
 	global_position += transform.x * speed * delta

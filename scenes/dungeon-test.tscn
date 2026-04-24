@@ -37,5 +37,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_4evpv")
 
+[node name="BossMusic" type="AudioStreamPlayer2D" parent="." unique_id=1405909221]
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1907493181]
 environment = SubResource("Environment_63mvo")

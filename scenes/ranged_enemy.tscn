@@ -44,6 +44,7 @@ atlas = ExtResource("1_u2kgh")
 region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nqoy7"]
+resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -87,7 +88,8 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rs3ab"]
-radius = 8.062258
+resource_local_to_scene = true
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ls4a"]
 radius = 202.0

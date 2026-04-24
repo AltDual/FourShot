@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://crsnyhuygsxlc"]
+
+[ext_resource type="Script" uid="uid://dkssarpytq3f2" path="res://scripts/scene-scripts/victory_scene.gd" id="1_sl7wn"]
+[ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_fefd3"]
+
+[node name="VictoryScene" type="Control" unique_id=72096722]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sl7wn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1882654701]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28627452, 0.9764706, 0.45490196, 0.59607846)
+
+[node name="Label" type="Label" parent="." unique_id=758199480]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = 34.0
+offset_right = -54.0
+offset_bottom = 75.0
+grow_horizontal = 2
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("2_fefd3")
+text = "BOSS DOWN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=370135534]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -30.0
+offset_right = 140.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2027471134]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fefd3")
+theme_override_font_sizes/font_size = 20
+text = "PLAY AGAIN"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1199252301]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fefd3")
+theme_override_font_sizes/font_size = 20
+text = "MAIN MENU"

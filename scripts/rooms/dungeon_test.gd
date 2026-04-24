@@ -3,6 +3,8 @@ extends Node
 const ROOM_RUNTIME_SCENE := preload("res://scenes/room-main.tscn")
 const ROOM_TRANSITION_COOLDOWN := 0.35
 
+const RANGED_ENEMY = preload("res://scenes/ranged_enemy.tscn")
+const BOSS_GOLEM = preload("res://scenes/not_so_sneak_golem.tscn")
 const SMALL_SLIME_ENEMY = preload("res://scenes/small_slime_enemy.tscn")
 const ELITE_SLIME_ENEMY = preload("res://scenes/elite_slime_enemy.tscn")
 
@@ -10,6 +12,7 @@ const ELITE_SLIME_ENEMY = preload("res://scenes/elite_slime_enemy.tscn")
 @onready var room_view: Node2D = $RoomView
 @onready var map_overlay = $MapCanvasLayer/MapOverlay
 @onready var player: CharacterBody2D = $Player
+@onready var boss_music: AudioStreamPlayer2D = $BossMusic
 #@onready var game_camera = $GameCamera
 
 var current_room_instance: Node2D
@@ -33,10 +36,10 @@ func _process(_delta: float) -> void:
 	if current_room.doors_locked and map_overlay.visible:
 		map_overlay.visible = false
 
-	if Input.is_action_just_pressed("ui_accept"):
-		if current_room.doors_locked and not current_room.cleared:
-			clear_current_room()
-			return
+	#if Input.is_action_just_pressed("ui_accept"):
+	#	if current_room.doors_locked and not current_room.cleared:
+	#		clear_current_room()
+	#		return
 
 func load_current_room() -> void:
 	if current_room_instance:
@@ -118,7 +121,8 @@ func handle_room_enter(room: RoomData) -> void:
 func enter_combat_room(room: RoomData) -> void:
 	if not room.enemies_spawned:
 		room.enemies_spawned = true
-		spawn_enemies(room, 3)    # however many you want
+		enemies_alive = 0
+		spawn_enemies(room, 1)    # however many you want
 	room.doors_locked = true
 	map_overlay.visible = false
 	refresh_current_room()
@@ -126,11 +130,26 @@ func enter_combat_room(room: RoomData) -> void:
 func enter_boss_room(room: RoomData) -> void:
 	if not room.enemies_spawned:
 		room.enemies_spawned = true
-		print("Spawn boss here")
-
+		enemies_alive = 0
+		spawn_boss()
+		boss_music.play()
 	room.doors_locked = true
 	map_overlay.visible = false
 	refresh_current_room()
+
+func spawn_boss() -> void:
+	enemies_alive = 1
+	var boss = BOSS_GOLEM.instantiate()
+	current_room_instance.add_child(boss)
+	# Spawn in center of room, away from player
+	boss.global_position = Vector2(640, 360)
+	boss.tree_exited.connect(_on_boss_killed)
+
+func _on_boss_killed() -> void:
+	boss_music.stop()
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	clear_current_room()
 
 func clear_current_room() -> void:
 	var room: RoomData = dungeon.get_current_room()
@@ -139,7 +158,7 @@ func clear_current_room() -> void:
 	room.doors_locked = false
 
 	if room.room_type == "boss":
-		print("Boss defeated")
+		_show_victory()
 
 	refresh_current_room()
 	map_overlay.refresh()
@@ -150,7 +169,6 @@ func refresh_current_room() -> void:
 
 #TESTING CODE FOR ENEMIES
 var enemies_alive: int = 0
-
 func spawn_enemies(room: RoomData, count: int) -> void:
 	var room_size = get_room_bounds() 
 	
@@ -190,6 +208,13 @@ func _on_enemy_died() -> void:
 	enemies_alive -= 1
 	if enemies_alive <= 0:
 		clear_current_room()
-
 func get_room_bounds() -> Rect2:
 	return Rect2(0, 0, 1280, 720)
+	
+func _show_victory() -> void:
+	for bullet in get_tree().get_nodes_in_group("bullets"):
+		bullet.queue_free()
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	get_tree().paused = true
+	get_tree().change_scene_to_file("res://scenes/victory.tscn")

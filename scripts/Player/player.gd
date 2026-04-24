@@ -52,6 +52,7 @@ func _ready():
 	SignalBus.hotbar_updated.emit.call_deferred(weapon_inventory, active_weapon_index)
 	upgrade_menu.upgrade_chosen.connect(_apply_upgrade)
 	SignalBus.level_changed.connect(_on_level_up)
+	gun.special_shot_fired.connect(_on_sniper_fired)
 
 func _physics_process(_delta: float) -> void:
 	if get_tree().paused:
@@ -76,6 +77,8 @@ func process_weapon_switching() -> void:
 		equip_weapon(1) # 1 is the second array slot (Pistol)
 
 func equip_weapon(index: int) -> void:
+	if has_sniper:
+		return
 	if weapon_inventory[index] != null:
 		active_weapon_index = index
 		gun.equip(weapon_inventory[index])
@@ -215,6 +218,31 @@ func _on_gun_reload_finished() -> void:
 	reload_bar.visible = false
 	if reload_tween:
 		reload_tween.kill()
+
+#Code for first Boss
+var special_weapon_boss = null  # reference to boss golem
+var has_sniper: bool = false
+
+const SNIPER_RESOURCE = preload("res://scripts/Gun/weapontypes/sniper_weapon.tres")
+
+func equip_special_weapon(boss) -> void:
+	has_sniper = true
+	special_weapon_boss = boss
+	gun.equip(SNIPER_RESOURCE)
+	SignalBus.special_weapon_acquired.emit()
+
+func has_special_weapon() -> bool:
+	return has_sniper
+
+func _on_sniper_fired() -> void:
+	# Called by gun after the special weapon fires
+	if has_sniper and special_weapon_boss:
+		special_weapon_boss.hit_with_sniper()
+	has_sniper = false
+	special_weapon_boss = null
+	# Re-equip previous weapon
+	equip_weapon(active_weapon_index)
+	SignalBus.special_weapon_used.emit()
 func flash_damage() -> void:
 	# Kill the previous tween if the player is hit rapidly
 	if damage_tween:

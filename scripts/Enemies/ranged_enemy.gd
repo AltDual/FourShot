@@ -35,12 +35,14 @@ var state: State = State.IDLE
 var current_health: int
 var player: Node = null
 var can_fire: bool = true
+var is_dead: bool = false  
  
 # ---------------------------------------------------------------------------
 # Init
 # ---------------------------------------------------------------------------
 func _ready() -> void:
 	add_to_group("enemies")
+	on_ready()
 	current_health = max_health
 	detection_area.body_entered.connect(_on_body_entered_detection)
 	detection_area.body_exited.connect(_on_body_exited_detection)
@@ -52,6 +54,8 @@ func on_ready() -> void:
 # Main loop
 # ---------------------------------------------------------------------------
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	_update_state()
  
 	match state:
@@ -140,6 +144,7 @@ func on_hit() -> void:
 	pass  # override for hit flash, sound, etc
 
 func _die() -> void:
+	is_dead = true
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.gain_xp(xp_gain)
