@@ -30,3 +30,4 @@ texture = ExtResource("4_haq8l")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=390181828]
 stream = ExtResource("5_bmp1f")
+volume_db = 8.0

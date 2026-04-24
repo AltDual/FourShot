@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://caxvquup7n7f0"]
+[gd_scene format=3 uid="uid://bh2f51qdyy0qr"]
 
 [ext_resource type="Script" uid="uid://dir8cd8e7tvrr" path="res://scripts/rooms/dungeon_test.gd" id="1_iwf7i"]
 [ext_resource type="Script" uid="uid://qd2wody7fdtr" path="res://scripts/rooms/room-generator.gd" id="2_ou35g"]
