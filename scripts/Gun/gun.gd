@@ -9,13 +9,14 @@ const BULLET = preload("res://scenes/bullet.tscn")
 
 @onready var muzzle: Marker2D = $Marker2D
 @onready var sprite: Sprite2D = $Sprite2D 
+@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
+@onready var muzzle_flash: Sprite2D = $Marker2D/MuzzleFlash
 
 var can_fire: bool = true
 var is_reloading: bool = false
 var current_ammo: int = 0
-
-# --- NEW: Replaces the buggy 'await' timer ---
 var fire_cooldown: float = 0.0 
+var flash_tween: Tween # Keep track of the tween so we can interrupt it
 
 func _process(delta: float) -> void:
 	if get_tree().paused:
@@ -99,6 +100,7 @@ func fire() -> void:
 	current_ammo -= 1
 	
 	SignalBus.ammo_changed.emit(current_ammo, weapon_data.mag_size)
+	play_shoot_effects()
 	
 	match weapon_data.pattern:
 		"single":
@@ -138,3 +140,25 @@ func spawn_bullet(angle: float) -> void:
 	
 	var bonus = get_parent().bonus_damage if get_parent().has_method("take_damage") else 0
 	bullet.setup(weapon_data.damage + bonus, weapon_data.bullet_speed, weapon_data.bullet_range)
+
+# --- NEW FUNCTION ---
+func play_shoot_effects() -> void:
+	# 1. Play the audio
+	# Note: To avoid sounds cutting each other off on high-fire-rate weapons, 
+	# AudioStreamPlayer2D handles rapid firing okay, but varying the pitch slightly adds great juice!
+	shoot_sound.pitch_scale = randf_range(0.9, 1.1)
+	shoot_sound.play()
+	
+	# 2. Trigger the muzzle flash
+	if flash_tween:
+		flash_tween.kill() # Stop previous animation if we shoot really fast
+		
+	muzzle_flash.visible = true
+	muzzle_flash.modulate.a = 1.0
+	muzzle_flash.scale = Vector2(randf_range(0.1, 0.15), randf_range(0.1, 0.15)) # Randomize size slightly
+	muzzle_flash.rotation_degrees = randf_range(0, 360) # Randomize rotation for variety
+	
+	# Fade it out over 0.05 seconds
+	flash_tween = create_tween()
+	flash_tween.tween_property(muzzle_flash, "modulate:a", 0.0, 0.05)
+	flash_tween.tween_callback(func(): muzzle_flash.visible = false)

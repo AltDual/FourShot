@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://tbfwl67iermv"]
 
 [ext_resource type="Script" uid="uid://cr27ee84fi8uw" path="res://scripts/Gun/gun.gd" id="1_og67c"]
-[ext_resource type="Texture2D" uid="uid://bfas4xchiuvtb" path="res://assets/images/Weapons/23.png" id="1_x77fm"]
 [ext_resource type="Script" uid="uid://ex5br4mqe7f1" path="res://resources/WeaponResource.gd" id="2_gp1hk"]
+[ext_resource type="Texture2D" uid="uid://d3cspsxn7ciql" path="res://assets/images/Weapons/ak67/side.png" id="3_6b133"]
+[ext_resource type="Texture2D" uid="uid://ikw212n64j7k" path="res://assets/images/Weapons/muzzle_flash.png" id="4_haq8l"]
+[ext_resource type="AudioStream" uid="uid://hfumkcjjqxoy" path="res://assets/audio/laser.mp3" id="5_bmp1f"]
 
 [sub_resource type="Resource" id="Resource_qd4js"]
 script = ExtResource("2_gp1hk")
@@ -14,8 +16,16 @@ weapon_data = SubResource("Resource_qd4js")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1213444043]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_x77fm")
+texture = ExtResource("3_6b133")
 offset = Vector2(5, -2)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=280865685]
 position = Vector2(8, -1)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Marker2D" unique_id=20386419]
+position = Vector2(-1.9999999, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_haq8l")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=390181828]
+stream = ExtResource("5_bmp1f")

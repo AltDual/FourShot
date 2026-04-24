@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://caxvquup7n7f0"]
+[gd_scene format=3 uid="uid://bh2f51qdyy0qr"]
 
 [ext_resource type="Script" uid="uid://dir8cd8e7tvrr" path="res://scripts/rooms/dungeon_test.gd" id="1_iwf7i"]
 [ext_resource type="Script" uid="uid://qd2wody7fdtr" path="res://scripts/rooms/room-generator.gd" id="2_ou35g"]
 [ext_resource type="Script" uid="uid://bwt62412w7wou" path="res://scripts/rooms/map-overlay.gd" id="3_4evpv"]
 [ext_resource type="PackedScene" uid="uid://r8qvl0bkm2fw" path="res://scenes/player.tscn" id="4_8lwq6"]
-[ext_resource type="PackedScene" uid="uid://bhferghnkd6qb" path="res://scenes/hud.tscn" id="5_63mvo"]
+[ext_resource type="PackedScene" uid="uid://cnacq424ym4ph" path="res://scenes/hud.tscn" id="5_63mvo"]
 
 [node name="DungeonTest" type="Node" unique_id=1509556783]
 script = ExtResource("1_iwf7i")
