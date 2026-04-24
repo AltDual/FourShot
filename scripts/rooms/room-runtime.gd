@@ -84,6 +84,9 @@ func setup(
 	position_player(entry_direction)
 	apply_camera_limits()
 	update_room_state()
+	
+	generate_obstacles()
+	
 	disable_doors_temporarily()
 
 func apply_camera_limits() -> void:
@@ -223,3 +226,44 @@ func _on_door_right_body_entered(body: Node) -> void:
 	if body == player and door_right.monitoring:
 		door_right.set_deferred("monitoring", false)
 		emit_signal("door_used", Vector2i.RIGHT)
+		
+#Obstacles
+func generate_obstacles() -> void:
+	# Keep start and boss rooms clear of random clutter
+	if room_data.room_type in ["start", "boss"]:
+		return
+
+	# Seed the RNG based on the room's grid position. 
+	# This guarantees the same layout if the player re-enters the room!
+	var room_seed = hash(str(room_grid_pos.x) + "_" + str(room_grid_pos.y))
+	var rng = RandomNumberGenerator.new()
+	rng.seed = room_seed
+
+	# Define inner bounds (Tile coordinates).
+	# Assuming 16x16 tiles (80x45 grid for a 1280x720 room).
+	# Margins keep the edges and doorways clear.
+	var min_x = 15
+	var max_x = 65
+	var min_y = 10
+	var max_y = 35
+
+	# Decide how cluttered this specific room should be
+	var num_obstacle_clusters = rng.randi_range(5, 15)
+
+	for i in range(num_obstacle_clusters):
+		var center_x = rng.randi_range(min_x, max_x)
+		var center_y = rng.randi_range(min_y, max_y)
+		
+		# Keep the dead center clear so we don't spawn on top of the player
+		if Rect2(35, 18, 10, 8).has_point(Vector2(center_x, center_y)):
+			continue
+
+		# Make small clusters instead of single tiles
+		var cluster_width = rng.randi_range(1, 5)
+		var cluster_height = rng.randi_range(1, 4)
+		
+		for ox in range(cluster_width):
+			for oy in range(cluster_height):
+				# Using your existing wall tile for the obstacles
+				wall_tilemap.set_cell(Vector2i(center_x + ox, center_y + oy), WALL_SOURCE_ID, WALL_ATLAS_COORDS_TOP)
+				

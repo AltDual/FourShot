@@ -29,7 +29,13 @@ func on_hit(target) -> void:
 	if target.has_method("take_damage"):
 		target.take_damage(damage)
 func _on_body_entered(body: Node) -> void:
-	print("Bullet hit: ", body.name, " | ", body.get_class())
+	# 1. Prevent the bullet from deleting itself on the player who shot it
+	if body.name == "Player" or body.is_in_group("player"):
+		return
+		
+	# 2. Damage the target if it's an enemy
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
+		
+	# 3. Destroy the bullet on ANY other body it touches (Walls, Obstacles, Enemies)
 	queue_free()
