@@ -5,9 +5,9 @@ const SPEED = 150.0
 #var last_direction: Vector2 = Vector2.RIGHT
 #var movement_locked: bool = false
 #var require_input_release: bool = false
-const HEALTH_UPGRADE = preload("uid://dgm8xdalnvvby")
-const DAMAGE_UPGRADE = preload("uid://hs6vyxu4bfep")
-const SPEED_UPGRADE = preload("uid://bvy68wqchh5ye")
+const HEALTH_UPGRADE = preload("res://resources/HealthUpgrade.tres")
+const DAMAGE_UPGRADE = preload("res://resources/DamageUpgrade.tres")
+const SPEED_UPGRADE = preload("res://resources/SpeedUpgrade.tres")
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
