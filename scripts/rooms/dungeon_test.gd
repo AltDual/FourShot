@@ -166,7 +166,7 @@ func clear_current_room() -> void:
 
 	if room.room_type == "boss":
 		_show_victory()
-
+	player.heal(20)
 	refresh_current_room()
 	map_overlay.refresh()
 

@@ -275,6 +275,12 @@ func flash_damage() -> void:
 	
 	# Step 2: Fade it back to normal over 0.15 seconds
 	damage_tween.tween_property(animated_sprite_2d, "modulate", Color(1, 1, 1, 1), 0.15)
+#Heal
+func heal(amount: int) -> void:
+	if is_dead:
+		return
+	current_health = min(current_health + amount, max_health)
+	SignalBus.health_changed.emit(current_health, max_health)
 
 #Dash
 func _start_dash() -> void:
