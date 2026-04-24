@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cf6mla6nk7ni5" path="res://scripts/scene-scripts/game_over.gd" id="1_wqhvx"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_tbwuq"]
+[ext_resource type="AudioStream" uid="uid://ds17p3eb2yv2r" path="res://assets/audio/somebody-that-i-used-to-know-trap-by-velvetcasca-extended-version.mp3" id="3_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://bdfxr35h1f5kq" path="res://assets/images/7gc52d.png" id="4_racf3"]
 
 [node name="GameOver" type="Control" unique_id=525147185]
 layout_mode = 3
@@ -62,3 +64,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_tbwuq")
 theme_override_font_sizes/font_size = 20
 text = "MAIN MENU"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1412706859]
+stream = ExtResource("3_tbwuq")
+volume_db = -12.0
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1593306042]
+position = Vector2(230, 278.00003)
+scale = Vector2(0.50666666, 0.24654378)
+texture = ExtResource("4_racf3")
