@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://r8qvl0bkm2fw" path="res://scenes/player.tscn" id="4_8lwq6"]
 [ext_resource type="PackedScene" uid="uid://cnacq424ym4ph" path="res://scenes/hud.tscn" id="5_63mvo"]
 [ext_resource type="Script" uid="uid://diojdaifcn3ev" path="res://scripts/rooms/minimap.gd" id="6_8lwq6"]
+[ext_resource type="AudioStream" uid="uid://wejhbt20bfwj" path="res://assets/audio/boss.mp3" id="6_8lwq6"]
+[ext_resource type="AudioStream" uid="uid://b7g4j3oweyyh5" path="res://assets/audio/dungeon.mp3" id="7_xnrlc"]
 
 [sub_resource type="Environment" id="Environment_63mvo"]
 glow_enabled = true
@@ -46,7 +48,15 @@ offset_top = 40.0
 offset_right = 173.0
 offset_bottom = 126.0
 script = ExtResource("6_8lwq6")
+[node name="BossMusic" type="AudioStreamPlayer" parent="." unique_id=109651757]
+stream = ExtResource("6_8lwq6")
+volume_db = -12.0
+parameters/looping = true
 
-[node name="BossMusic" type="AudioStreamPlayer2D" parent="." unique_id=1405909221]
+[node name="DungeonMusic" type="AudioStreamPlayer" parent="." unique_id=160499306]
+stream = ExtResource("7_xnrlc")
+volume_db = -12.0
+parameters/looping = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1907493181]
 environment = SubResource("Environment_63mvo")

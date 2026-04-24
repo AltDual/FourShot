@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dndbd3jg75dqf" path="res://scripts/scene-scripts/title_screen.gd" id="1_sa3yf"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_sa3yf"]
+[ext_resource type="AudioStream" uid="uid://b6edbugqjckut" path="res://assets/audio/lobby.mp3" id="3_s4lrb"]
 
 [node name="TitleScreen" type="Control" unique_id=849884656]
 layout_mode = 3
@@ -93,6 +94,12 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_sa3yf")
 text = "Credits: Braden Chiu. Michael Chen, Taiki Shinokawa"
 horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2047145374]
+stream = ExtResource("3_s4lrb")
+volume_db = -12.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]

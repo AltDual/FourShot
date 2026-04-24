@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://dltdaiv0tmn38"]
+[gd_scene format=3 uid="uid://l4bvubrpogsq"]
 
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://cevalwnj1xwct" path="res://scripts/scene-scripts/game-scene.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://b6edbugqjckut" path="res://assets/audio/lobby.mp3" id="3_q60fs"]
 
 [node name="Game" type="Control" unique_id=1305911699]
 layout_mode = 3
@@ -53,6 +54,12 @@ offset_bottom = 51.0
 [node name="BackButton" type="Button" parent="Background/CenterContainer2" unique_id=502591284]
 layout_mode = 2
 text = "BACK"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=845590504]
+stream = ExtResource("3_q60fs")
+volume_db = -12.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DungeonButton" to="." method="_on_dungeon_pressed"]
 [connection signal="pressed" from="Background/CenterContainer/MarginContainer/VBoxContainer/DebugButton" to="." method="_on_debug_button_pressed"]

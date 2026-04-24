@@ -13,7 +13,8 @@ const ELITE_SLIME_ENEMY = preload("res://scenes/elite_slime_enemy.tscn")
 @onready var map_overlay = $MapCanvasLayer/MapOverlay
 @onready var minimap = $MapCanvasLayer/Minimap
 @onready var player: CharacterBody2D = $Player
-@onready var boss_music: AudioStreamPlayer2D = $BossMusic
+@onready var boss_music: AudioStreamPlayer = $BossMusic
+@onready var dungeon_music: AudioStreamPlayer = $DungeonMusic
 #@onready var game_camera = $GameCamera
 
 var current_room_instance: Node2D
@@ -26,6 +27,7 @@ func _ready() -> void:
 	map_overlay.set_references(dungeon, player)
 	minimap.setup(player)
 	load_current_room()
+	dungeon_music.play()
 
 func _process(_delta: float) -> void:
 	var current_room: RoomData = dungeon.get_current_room()
@@ -136,6 +138,7 @@ func enter_boss_room(room: RoomData) -> void:
 		room.enemies_spawned = true
 		enemies_alive = 0
 		spawn_boss()
+		dungeon_music.stop()
 		boss_music.play()
 	room.doors_locked = true
 	map_overlay.visible = false
@@ -216,6 +219,10 @@ func get_room_bounds() -> Rect2:
 	return Rect2(0, 0, 1280, 720)
 	
 func _show_victory() -> void:
+	# Stop all music tracks to ensure silence during the scene transition
+	dungeon_music.stop()
+	boss_music.stop()
+
 	for bullet in get_tree().get_nodes_in_group("bullets"):
 		bullet.queue_free()
 	for enemy in get_tree().get_nodes_in_group("enemies"):

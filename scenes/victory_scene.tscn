@@ -1,7 +1,21 @@
-[gd_scene format=3 uid="uid://crsnyhuygsxlc"]
+[gd_scene format=3 uid="uid://bct05rqq0u7yo"]
 
-[ext_resource type="Script" uid="uid://dkssarpytq3f2" path="res://scripts/scene-scripts/victory_scene.gd" id="1_sl7wn"]
+[ext_resource type="Script" path="res://scripts/scene-scripts/victory_scene.gd" id="1_sl7wn"]
 [ext_resource type="FontFile" uid="uid://bttqv8528lowt" path="res://assets/fonts/Minecraft.ttf" id="2_fefd3"]
+[ext_resource type="AudioStream" uid="uid://cvuc0k4ndhlvh" path="res://assets/audio/silent-partner.mp3" id="3_fefd3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fefd3"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+initial_velocity_min = 364.44
+initial_velocity_max = 364.44
+gravity = Vector3(0, 98, 0)
+scale_min = 9.889999
+scale_max = 9.889999
+color = Color(1, 0, 0, 1)
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
 
 [node name="VictoryScene" type="Control" unique_id=72096722]
 layout_mode = 3
@@ -11,6 +25,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sl7wn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=425285540]
+position = Vector2(4, 2)
+rotation = 0.61086524
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_fefd3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="GPUParticles2D" unique_id=2100942485]
+position = Vector2(518.68805, -355.86462)
+rotation = -4.534365
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_fefd3")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1882654701]
 layout_mode = 1
@@ -62,3 +88,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_fefd3")
 theme_override_font_sizes/font_size = 20
 text = "MAIN MENU"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=225611371]
+stream = ExtResource("3_fefd3")
+volume_db = -12.0
+autoplay = true
+parameters/looping = true
