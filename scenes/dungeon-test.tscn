@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://bh2f51qdyy0qr"]
+[gd_scene format=3 uid="uid://caxvquup7n7f0"]
 
 [ext_resource type="Script" uid="uid://dir8cd8e7tvrr" path="res://scripts/rooms/dungeon_test.gd" id="1_iwf7i"]
 [ext_resource type="Script" uid="uid://qd2wody7fdtr" path="res://scripts/rooms/room-generator.gd" id="2_ou35g"]
 [ext_resource type="Script" uid="uid://bwt62412w7wou" path="res://scripts/rooms/map-overlay.gd" id="3_4evpv"]
 [ext_resource type="PackedScene" uid="uid://r8qvl0bkm2fw" path="res://scenes/player.tscn" id="4_8lwq6"]
 [ext_resource type="PackedScene" uid="uid://cnacq424ym4ph" path="res://scenes/hud.tscn" id="5_63mvo"]
-[ext_resource type="Script" path="res://scripts/rooms/minimap.gd" id="6_8lwq6"]
+[ext_resource type="Script" uid="uid://diojdaifcn3ev" path="res://scripts/rooms/minimap.gd" id="6_8lwq6"]
 [ext_resource type="AudioStream" uid="uid://wejhbt20bfwj" path="res://assets/audio/boss.mp3" id="7_n5nod"]
 [ext_resource type="AudioStream" uid="uid://b7g4j3oweyyh5" path="res://assets/audio/dungeon.mp3" id="7_xnrlc"]
 

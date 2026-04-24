@@ -23,8 +23,8 @@ func _draw() -> void:
 
 	# 1. Draw the Room Background
 	var scaled_room = Rect2(Vector2.ZERO, room_size * map_scale)
-	draw_rect(scaled_room, Color(0.1, 0.1, 0.1, 0.8)) # Dark gray background
-	draw_rect(scaled_room, Color(0.8, 0.8, 0.8, 1.0), false, 2.0) # White border outline
+	draw_rect(scaled_room, Color(0.1, 0.1, 0.1, 0.4)) # Dark gray background
+	draw_rect(scaled_room, Color(0.8, 0.8, 0.8, 0.7), false, 2.0) # White border outline
 
 	# 2. Draw the Player (Green Dot)
 	var relative_player_pos = player.global_position - current_room_top_left
