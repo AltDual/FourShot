@@ -23,6 +23,7 @@ offset = Vector2(5, -2)
 position = Vector2(8, -1)
 
 [node name="MuzzleFlash" type="Sprite2D" parent="Marker2D" unique_id=20386419]
+visible = false
 position = Vector2(-1.9999999, 0)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_haq8l")
