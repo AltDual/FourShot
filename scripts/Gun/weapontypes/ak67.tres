@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ov0ui")
 weapon_name = "HK-67"
-damage = 15
+damage = 25
 fire_rate = 0.15
 bullet_speed = 600.0
 reload_time = 0.6
