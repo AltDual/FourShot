@@ -2,6 +2,102 @@
 
 [ext_resource type="PackedScene" uid="uid://dkxndoobbicx5" path="res://scenes/ranged_enemy.tscn" id="1_8ywrb"]
 [ext_resource type="Script" uid="uid://8vpbvacnmdpo" path="res://scripts/Enemies/small_slime_enemy.gd" id="2_oq1ga"]
+[ext_resource type="Texture2D" uid="uid://dcdco4uno0hhm" path="res://assets/images/Enemies/slime.png" id="3_ytdci"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs3ab"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32iyl"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptmmb"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0fr6"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqoy7"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ls4a"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w150n"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvjff"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r77u"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3aa2"]
+atlas = ExtResource("3_ytdci")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ytdci"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs3ab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32iyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptmmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0fr6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqoy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ls4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w150n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvjff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r77u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3aa2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b1bll"]
+resource_local_to_scene = true
+radius = 8.0
 
 [node name="Small_Slime_Enemy" unique_id=688229520 instance=ExtResource("1_8ywrb")]
 script = ExtResource("2_oq1ga")
+bullet_speed = 400.0
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=2058940189]
+sprite_frames = SubResource("SpriteFrames_ytdci")
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=829269521]
+shape = SubResource("CircleShape2D_b1bll")

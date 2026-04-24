@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://mx8wsao382i2"]
+
+[ext_resource type="Script" uid="uid://bubkm5i60nmod" path="res://scripts/scene-scripts/explosion.gd" id="1_q7epf"]
+
+[sub_resource type="Curve" id="Curve_17npe"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.4831462), 0.0, -1.4831462, 0, 1, Vector2(1, 0), -1.4831462, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nfeox"]
+curve = SubResource("Curve_17npe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0x32"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 63.66
+initial_velocity_max = 87.46
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_max = 157.73
+scale_over_velocity_curve = SubResource("CurveTexture_nfeox")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.3
+
+[sub_resource type="Gradient" id="Gradient_17npe"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfeox"]
+gradient = SubResource("Gradient_17npe")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Explosion" type="GPUParticles2D" unique_id=1513846862]
+modulate = Color(3.7045925, 3.2334168, 0.24988116, 1)
+emitting = false
+amount = 25
+lifetime = 0.44
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_o0x32")
+script = ExtResource("1_q7epf")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1710090158]
+color = Color(2.042526, 1.3878068, 0, 1)
+texture = SubResource("GradientTexture2D_nfeox")

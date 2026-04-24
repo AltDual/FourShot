@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://r8qvl0bkm2fw" path="res://scenes/player.tscn" id="4_8lwq6"]
 [ext_resource type="PackedScene" uid="uid://cnacq424ym4ph" path="res://scenes/hud.tscn" id="5_63mvo"]
 
+[sub_resource type="Environment" id="Environment_63mvo"]
+glow_enabled = true
+glow_bloom = 0.55
+
 [node name="DungeonTest" type="Node" unique_id=1509556783]
 script = ExtResource("1_iwf7i")
 
@@ -32,3 +36,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_4evpv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1907493181]
+environment = SubResource("Environment_63mvo")

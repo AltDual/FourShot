@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var max_health: int = 40
 @export var move_speed: float = 60.0
 @export var damage: int = 8
-@export var bullet_speed: float = 400.0
+@export var bullet_speed: float = 250.0
 @export var bullet_range: float = 600.0
 @export var fire_rate: float = 1.5        # seconds between shots
 @export var preferred_range: float = 200.0  # tries to stay this far away
