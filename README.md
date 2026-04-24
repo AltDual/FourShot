@@ -33,4 +33,5 @@ Due to the scalability of the weapon and enemy systems, it is easy to add more c
 ## How to Play
 - To view the controls they can be viewed from the main menu
 - Clear all the rooms (or not) and fight the boss to win!
+- The boss is immune to all normal bullets, but a special rifle may be able to damage it...
 - Tip: Dash is very useful as it gives i-frames
